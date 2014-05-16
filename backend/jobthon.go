@@ -28,12 +28,13 @@ func init() {
 
 	m.Get("/empresas", listaEmpresas)
 	m.Get("/empresa/:email", getEmpresa)
+	m.Post("/empresa", addEmpresa)
 
 	m.Get("/vagas", listaVagas)
 	m.Get("/vaga/:email", getVaga)
 
-	m.Post("/curriculo", addCurriculo)
 	m.Get("/curriculo/:email", getCurriculo)
+	m.Post("/curriculo", addCurriculo)
 
 	// curriculosFake := []Curriculo{
 	// 	Curriculo{
@@ -66,12 +67,13 @@ type Analise struct {
 // Empresa
 // Empresa Model
 type Empresa struct {
-	Id     int64  `json:"id" datastore:"-"`
-	Email  string `json:"email"`
-	Nome   string `json:"nome"`
-	Cidade string `json:"cidade"`
-	Estado string `json:"estado"`
-	Sobre  string `json:"sobre"`
+	Id       int64  `json:"id" datastore:"-"`
+	Email    string `json:"email"`
+	Telefone string `json:"email"`
+	Nome     string `json:"nome"`
+	Cidade   string `json:"cidade"`
+	Estado   string `json:"estado"`
+	Sobre    string `json:"sobre"`
 }
 
 // Empresa Controllers
@@ -79,12 +81,14 @@ func listaEmpresas(r render.Render) {
 	empresasFake := []Empresa{
 		Empresa{
 			Nome:   "Dev Coop",
+			Email:  "dev@coop.com.br",
 			Cidade: "São Paulo",
 			Estado: "SP",
 			Sobre:  "Mauris iaculis est a vestibulum venenatis. Vestibulum justo lacus, aliquet sit amet est at, laoreet tincidunt sapien. Nunc ac lectus ultrices, iaculis mauris non, commodo tellus. Nullam dictum eleifend molestie. Integer malesuada turpis non sem hendrerit aliquet. Proin id convallis turpis. Mauris ornare id nibh vel rhoncus. Aliquam tincidunt nunc in vehicula mollis. Suspendisse posuere eros id augue congue viverra.",
 		},
 		Empresa{
 			Nome:   "Hackthon Dev Team",
+			Email:  "Hackthondev@team.com.br",
 			Cidade: "Florianópolis",
 			Estado: "SC",
 			Sobre:  "É nois no POG: Do mesmo modo, o consenso sobre a necessidade de qualificação desafia a capacidade de equalização das direções preferenciais no sentido do progresso.",
@@ -94,7 +98,7 @@ func listaEmpresas(r render.Render) {
 	r.JSON(http.StatusOK, empresasFake)
 }
 
-func addEmpresa(r render.Render, req *http.Request) {
+func addEmpresa(c appengine.Context, r render.Render, req *http.Request) {
 	empresa := new(Empresa)
 	decoder := json.NewDecoder(req.Body)
 	err := decoder.Decode(&empresa)
@@ -104,12 +108,22 @@ func addEmpresa(r render.Render, req *http.Request) {
 		return
 	}
 
-	// slugNome := slug.Make(empresa.Nome)
-
+	key := datastore.NewKey(c, "Empresa", empresa.Email, 0, nil)
+	datastore.Put(c, key, empresa)
+	r.JSON(http.StatusOK, "success")
 }
 
-func getEmpresa(r render.Render, params martini.Params) {
+func getEmpresa(c appengine.Context, r render.Render, params martini.Params) {
+	key := datastore.NewKey(c, "Empresa", params["email"], 0, nil)
+	empresa := new(Empresa)
+	err := datastore.Get(c, key, empresa)
 
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	r.JSON(http.StatusOK, empresa)
 }
 
 type Vaga struct {
