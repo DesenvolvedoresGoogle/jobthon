@@ -1,26 +1,56 @@
-package jobthon
+package gdgjobthon
 
 import (
+	"encoding/json"
+	"log"
 	"net/http"
-
-	"appengine"
-	"appengine/datastore"
 
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
+
+	"appengine"
+	"appengine/datastore"
 )
 
 func AppEngine(c martini.Context, r *http.Request) {
 	c.Map(appengine.NewContext(r))
 }
 
+func CORS(w http.ResponseWriter) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+}
+
 func init() {
 	m := martini.Classic()
 	m.Use(render.Renderer())
 	m.Use(AppEngine)
+	m.Use(CORS)
 
 	m.Get("/empresas", listaEmpresas)
+	m.Get("/empresa/:email", getEmpresa)
+
 	m.Get("/vagas", listaVagas)
+	m.Get("/vaga/:email", getVaga)
+
+	m.Post("/curriculo", addCurriculo)
+	m.Get("/curriculo/:email", getCurriculo)
+
+	// curriculosFake := []Curriculo{
+	// 	Curriculo{
+	// 		Nome:        "Ricardo Cherobin",
+	// 		Idade:       27,
+	// 		Cidade:      "Florianópolis",
+	// 		Estado:      "SC",
+	// 		Habilidades: []string{"PHP", "Java", "MySQL", "IA"},
+	// 	},
+	// 	Curriculo{
+	// 		Nome:        "Nassor Paulino da Silva",
+	// 		Idade:       29,
+	// 		Cidade:      "Florianópolis",
+	// 		Estado:      "SC",
+	// 		Habilidades: []string{"PHP", "Java", "MySQL", "Postgres", "Go", "Python", "Ruby", "Ruby on Rails", "SolR", "Elasticsearch"},
+	// 	},
+	// }
 
 	http.Handle("/", m)
 }
@@ -37,18 +67,16 @@ type Analise struct {
 // Empresa Model
 type Empresa struct {
 	Id     int64  `json:"id" datastore:"-"`
+	Email  string `json:"email"`
 	Nome   string `json:"nome"`
 	Cidade string `json:"cidade"`
 	Estado string `json:"estado"`
 	Sobre  string `json:"sobre"`
 }
 
-func (e *Empresa) Salvar() error {
-	return nil
-}
-
-func ListaEmpresas() []Empresa {
-	return []Empresa{
+// Empresa Controllers
+func listaEmpresas(r render.Render) {
+	empresasFake := []Empresa{
 		Empresa{
 			Nome:   "Dev Coop",
 			Cidade: "São Paulo",
@@ -62,22 +90,31 @@ func ListaEmpresas() []Empresa {
 			Sobre:  "É nois no POG: Do mesmo modo, o consenso sobre a necessidade de qualificação desafia a capacidade de equalização das direções preferenciais no sentido do progresso.",
 		},
 	}
+
+	r.JSON(http.StatusOK, empresasFake)
 }
 
-// Empresa Controllers
-func listaEmpresas(r render.Render) {
-	r.JSON(200, ListaEmpresas())
+func addEmpresa(r render.Render, req *http.Request) {
+	empresa := new(Empresa)
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&empresa)
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	// slugNome := slug.Make(empresa.Nome)
+
 }
 
-func addEmpresa(r render.Render) {
-}
-
-func getEmpresa(key datastore.Key, r render.Render) {
+func getEmpresa(r render.Render, params martini.Params) {
 
 }
 
 type Vaga struct {
 	Id          int64    `json:"id" datastore:"-"`
+	Email       string   `json:"email"`
 	Titulo      string   `json:"titulo"`
 	Sobre       string   `json:"sobre"`
 	Habilidades []string `json:"habilidades"`
@@ -88,8 +125,8 @@ type Vaga struct {
 	Contratacao []string `json:"contratacao"`
 }
 
-func ListaVagas() []Vaga {
-	return []Vaga{
+func listaVagas(r render.Render) {
+	vagasFake := []Vaga{
 		Vaga{
 			Titulo:      "Programador Go",
 			Sobre:       "É claro que a revolução dos costumes apresenta tendências no sentido de aprovar a manutenção de alternativas às soluções ortodoxas.",
@@ -122,38 +159,50 @@ func ListaVagas() []Vaga {
 		},
 		// Stripper
 	}
+
+	r.JSON(http.StatusOK, vagasFake)
 }
 
-func listaVagas(r render.Render) {
-	// filtrar pela área
-	r.JSON(200, ListaVagas())
+func getVaga() {
+
 }
 
 // Curriculo
 type Curriculo struct {
 	Id          int64    `json:"id" datastore:"-"`
+	Email       string   `json:"email"`
 	Nome        string   `json:"nome"`
 	Idade       int64    `json:"idade"`
 	Habilidades []string `json:"habilidades"`
 	Cidade      string   `json:"cidade"`
 	Estado      string   `json:"estado"`
+	Telefone    string   `json:"telefone"`
 }
 
-func ListaCurriculo() []Curriculo {
-	return []Curriculo{
-		Curriculo{
-			Nome:        "Ricardo Cherobin",
-			Idade:       27,
-			Cidade:      "Florianópolis",
-			Estado:      "SC",
-			Habilidades: []string{"PHP", "Java", "MySQL", "IA"},
-		},
-		Curriculo{
-			Nome:        "Nassor Paulino da Silva",
-			Idade:       29,
-			Cidade:      "Florianópolis",
-			Estado:      "SC",
-			Habilidades: []string{"PHP", "Java", "MySQL", "Postgres", "Go", "Python", "Ruby", "Ruby on Rails", "SolR", "Elasticsearch"},
-		},
+func addCurriculo(c appengine.Context, r render.Render, req *http.Request) {
+	curriculo := new(Curriculo)
+	decoder := json.NewDecoder(req.Body)
+	err := decoder.Decode(&curriculo)
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+		return
 	}
+
+	key := datastore.NewKey(c, "Curriculo", curriculo.Email, 0, nil)
+	datastore.Put(c, key, curriculo)
+	r.JSON(http.StatusOK, "success")
+}
+
+func getCurriculo(c appengine.Context, r render.Render, params martini.Params) {
+	key := datastore.NewKey(c, "Curriculo", params["email"], 0, nil)
+	curriculo := new(Curriculo)
+	err := datastore.Get(c, key, curriculo)
+
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+	}
+
+	r.JSON(http.StatusOK, curriculo)
 }
