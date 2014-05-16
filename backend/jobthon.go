@@ -26,7 +26,7 @@ func init() {
 	m.Use(AppEngine)
 	m.Use(CORS)
 
-	m.Get("/empresas", listaEmpresas)
+	m.Get("/empresas", listEmpresas)
 	m.Get("/empresa/:email", getEmpresa)
 	m.Post("/empresa", addEmpresa)
 
@@ -77,21 +77,23 @@ type Empresa struct {
 }
 
 // Empresa Controllers
-func listaEmpresas(r render.Render) {
+func listEmpresas(r render.Render) {
 	empresasFake := []Empresa{
 		Empresa{
-			Nome:   "Dev Coop",
-			Email:  "dev@coop.com.br",
-			Cidade: "São Paulo",
-			Estado: "SP",
-			Sobre:  "Mauris iaculis est a vestibulum venenatis. Vestibulum justo lacus, aliquet sit amet est at, laoreet tincidunt sapien. Nunc ac lectus ultrices, iaculis mauris non, commodo tellus. Nullam dictum eleifend molestie. Integer malesuada turpis non sem hendrerit aliquet. Proin id convallis turpis. Mauris ornare id nibh vel rhoncus. Aliquam tincidunt nunc in vehicula mollis. Suspendisse posuere eros id augue congue viverra.",
+			Nome:     "Dev Coop",
+			Email:    "dev@coop.com.br",
+			Cidade:   "São Paulo",
+			Estado:   "SP",
+			Telefone: "4844444444",
+			Sobre:    "Mauris iaculis est a vestibulum venenatis. Vestibulum justo lacus, aliquet sit amet est at, laoreet tincidunt sapien. Nunc ac lectus ultrices, iaculis mauris non, commodo tellus. Nullam dictum eleifend molestie. Integer malesuada turpis non sem hendrerit aliquet. Proin id convallis turpis. Mauris ornare id nibh vel rhoncus. Aliquam tincidunt nunc in vehicula mollis. Suspendisse posuere eros id augue congue viverra.",
 		},
 		Empresa{
-			Nome:   "Hackthon Dev Team",
-			Email:  "Hackthondev@team.com.br",
-			Cidade: "Florianópolis",
-			Estado: "SC",
-			Sobre:  "É nois no POG: Do mesmo modo, o consenso sobre a necessidade de qualificação desafia a capacidade de equalização das direções preferenciais no sentido do progresso.",
+			Nome:     "Hackthon Dev Team",
+			Email:    "hackthondev@team.com.br",
+			Cidade:   "Florianópolis",
+			Estado:   "SC",
+			Telefone: "4833333333",
+			Sobre:    "É nois no POG: Do mesmo modo, o consenso sobre a necessidade de qualificação desafia a capacidade de equalização das direções preferenciais no sentido do progresso.",
 		},
 	}
 
