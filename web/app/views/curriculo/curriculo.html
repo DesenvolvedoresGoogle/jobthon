@@ -1,0 +1,282 @@
+<h3>Curriculo</h3>
+<button data-ng-click="initNewCurriculo()" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newCurriculo">
+    <span class="glyphicon glyphicon-plus"></span>
+</button>
+<p></p>
+
+<div class="list-group" data-ng-repeat="curriculo in Curriculos">
+    <a href ng-click="editCurriculos(curriculo)" class="list-group-item" data-toggle="modal" data-target="#editCurriculo">
+        <h4 class="list-group-item-heading" ng-bind="curriculo.titulo">List group item heading</h4>
+        <p class="list-group-item-text" ng-bind="curriculo.sobre"></p>
+        <button ui-sref="main.curriculoscurriculo({id: curriculo.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Curriculos</button>
+    </a>
+</div>
+
+
+
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editCurriculo" tabindex="-1" role="dialog" aria-labelledby="editCurriculoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="editCurriculoLabel">Editar Curriculo</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Form -->
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputNome" class="col-sm-2 control-label">Nome:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputNome" placeholder="Nome" ng-model="editCurriculo.nome">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputIdade"class="col-sm-2 control-label">Idade:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputIdade" placeholder="Idade" ng-model="editCurriculo.idade">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade"class="col-sm-2 control-label">Cidade:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editCurriculo.cidade">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Estado:</label>
+                        <div class="col-sm-10">
+                            <label class="control-label">{{curriculo.estado}}SC</label>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Telefone:</label>
+                        <div class="col-sm-10">
+                            <label class="control-label">{{curriculo.telefone}}(48)9999-9999</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputHabilidades" class="col-sm-2 control-label">Habilidades</label>
+                        <div class="col-sm-10">
+                            <table class="table table-hover">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="habilidade in editCurriculo.habilidades">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{habilidade.descricao}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Apply</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editCurriculo" tabindex="-1" role="dialog" aria-labelledby="editCurriculoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="editCurriculoLabel">Editar Curriculo</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- Form -->
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Curriculo</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da curriculo" ng-model="editCurriculo.titulo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="inputSobre" placeholder="Sobre" ng-model="editCurriculo.sobre"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectArea" class="col-sm-2 control-label">Area da Curriculo</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="selectArea">
+                                <option ng-repeat="area in AreasCurriculos">
+                                    {{area.descricao}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectArea" class="col-sm-2 control-label">Area da Curriculo</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" id="selectArea">
+                                <option ng-repeat="tipo in TipoContratacao">
+                                    {{tipo.descricao}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">Aberta
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputHabilidades" class="col-sm-2 control-label">Habilidades</label>
+                        <div class="col-sm-10">
+                            <table class="table table-hover">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="habilidade in editCurriculo.habilidades">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{habilidade}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newItem">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- New Modal -->
+<div class="modal fade" id="newCurriculo" tabindex="-1" role="dialog" aria-labelledby="newCurriculoLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="newCurriculoLabel">Nova Curriculo</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- Form -->
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Curriculo</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da curriculo" ng-model="newCurriculo.titulo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
+                        <div class="col-sm-10">
+                            <textarea type="email" class="form-control" id="inputSobre" placeholder="Sobre" ng-model="newCurriculo.sobre"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="selectArea" class="col-sm-2 control-label">Area da Curriculo</label>
+                        <div class="col-sm-10">
+                            <select ng-model="newCurriculo.area" ng-options="area.descricao for area in AreasCurriculos" class="form-control" id="selectArea">
+                                <option value="">-- selecionar area --</option>
+                            </select>
+                            <select class="form-control" id="selectArea">
+                                <option ng-repeat="area in AreasCurriculos">
+                                    {{area.descricao}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="selectArea" class="col-sm-2 control-label">Tipo contrato</label>
+                        <div class="col-sm-10">
+                            <select ng-model="newCurriculo.contratacao" ng-options="tipo.descricao for tipo in TipoContratacao" class="form-control" id="selectArea">
+                                <option value="">-- selecionar contratação --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">Aberta
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputHabilidades" class="col-sm-2 control-label">Habilidades</label>
+                        <div class="col-sm-10">
+                            <table class="table table-hover">
+                                <thead>
+
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="habilidade in newCurriculo.habilidades">
+                                        <td>{{$index + 1}}</td>
+                                        <td>{{habilidade}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newItem">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button ng-click="addCurriculo()" type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

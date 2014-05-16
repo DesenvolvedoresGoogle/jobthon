@@ -8,7 +8,7 @@
     <a href ng-click="editVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#editVaga">
         <h4 class="list-group-item-heading" ng-bind="vaga.titulo">List group item heading</h4>
         <p class="list-group-item-text" ng-bind="vaga.sobre"></p>
-        <button ui-sref="main.vagascurriculo({id: vaga.id} )" ng-click="$event.stopPropagation();"class="btn btn-primary">Curriculos</button>
+        <button ui-sref="main.vagascurriculo({id: vaga.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Curriculos</button>
     </a>
 </div>
 
@@ -79,7 +79,7 @@
                                 <tbody>
                                     <tr ng-repeat="habilidade in editVaga.habilidades">
                                         <td>{{$index + 1}}</td>
-                                        <td>{{habilidade.descricao}}</td>
+                                        <td>{{habilidade}}</td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -132,6 +132,9 @@
                     <div class="form-group">
                         <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
                         <div class="col-sm-10">
+                            <select ng-model="newVaga.area" ng-options="area.descricao for area in AreasVagas" class="form-control" id="selectArea">
+                                <option value="">-- selecionar area --</option>
+                            </select>
                             <select class="form-control" id="selectArea">
                                 <option ng-repeat="area in AreasVagas">
                                     {{area.descricao}}
@@ -141,12 +144,10 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
+                        <label for="selectArea" class="col-sm-2 control-label">Tipo contrato</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="selectArea">
-                                <option ng-repeat="tipo in TipoContratacao">
-                                    {{tipo.descricao}}
-                                </option>
+                            <select ng-model="newVaga.contratacao" ng-options="tipo.descricao for tipo in TipoContratacao" class="form-control" id="selectArea">
+                                <option value="">-- selecionar contratação --</option>
                             </select>
                         </div>
                     </div>
@@ -171,7 +172,7 @@
                                 <tbody>
                                     <tr ng-repeat="habilidade in newVaga.habilidades">
                                         <td>{{$index + 1}}</td>
-                                        <td>{{habilidade.descricao}}</td>
+                                        <td>{{habilidade}}</td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -189,7 +190,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button ng-click="addVaga()" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

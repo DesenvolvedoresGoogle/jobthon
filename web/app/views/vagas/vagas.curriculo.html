@@ -1,7 +1,7 @@
 <h3>Melhores Curriculos</h3>
 <div class="list-group" data-ng-repeat="curriculo in VagaCurriculos">
     <a href ng-click="readCurriculo(curriculo)" class="list-group-item" data-toggle="modal" data-target="#viewCurriculo">
-        <h4 class="list-group-item-heading" >{{$index + 1}} - {{curriculo.nome}}</h4>
+        <h4 class="list-group-item-heading">{{$index + 1}} - {{curriculo.nome}}</h4>
         <p class="list-group-item-text" ng-bind="curriculo.sobre"></p>
     </a>
 </div>
@@ -39,6 +39,7 @@
                             <label class="control-label">{{curriculo.estado}}SC</label>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Telefone:</label>
                         <div class="col-sm-10">
