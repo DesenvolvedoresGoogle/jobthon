@@ -1,5 +1,5 @@
 application: gdgjobthom
-version: 2
+version: 2.1
 runtime: go
 api_version: go1
 

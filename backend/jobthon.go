@@ -69,7 +69,7 @@ type Analise struct {
 type Empresa struct {
 	Id       int64  `json:"id" datastore:"-"`
 	Email    string `json:"email"`
-	Telefone string `json:"email"`
+	Telefone string `json:"telefone"`
 	Nome     string `json:"nome"`
 	Cidade   string `json:"cidade"`
 	Estado   string `json:"estado"`
