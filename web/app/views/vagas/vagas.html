@@ -21,7 +21,6 @@
                 <h4 class="modal-title" id="editVagaLabel">Editar Vaga</h4>
             </div>
             <div class="modal-body">
-
                 <!-- Form -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
@@ -81,9 +80,13 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{habilidade}}</td>
                                     </tr>
+                                    <tr ng-if="adicionando">
+                                        <td></td>
+                                        <td><input type="text" ng-model="habilidade"><button ng-click="addHabilidade(editVaga, habilidade)"class="btn btn-success btn-sm">+</button></td></td>
+                                    </tr>
                                     <tr>
                                         <td>
-                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newItem">
+                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </td>
@@ -115,6 +118,7 @@
             <div class="modal-body">
 
                 <!-- Form -->
+                <!-- Form -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Vaga</label>
@@ -126,15 +130,12 @@
                     <div class="form-group">
                         <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
                         <div class="col-sm-10">
-                            <textarea type="email" class="form-control" id="inputSobre" placeholder="Sobre" ng-model="newVaga.sobre"></textarea>
+                            <textarea class="form-control" id="inputSobre" placeholder="Sobre" ng-model="newVaga.sobre"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
                         <div class="col-sm-10">
-                            <select ng-model="newVaga.area" ng-options="area.descricao for area in AreasVagas" class="form-control" id="selectArea">
-                                <option value="">-- selecionar area --</option>
-                            </select>
                             <select class="form-control" id="selectArea">
                                 <option ng-repeat="area in AreasVagas">
                                     {{area.descricao}}
@@ -144,10 +145,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="selectArea" class="col-sm-2 control-label">Tipo contrato</label>
+                        <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
                         <div class="col-sm-10">
-                            <select ng-model="newVaga.contratacao" ng-options="tipo.descricao for tipo in TipoContratacao" class="form-control" id="selectArea">
-                                <option value="">-- selecionar contratação --</option>
+                            <select class="form-control" id="selectArea">
+                                <option ng-repeat="tipo in TipoContratacao">
+                                    {{tipo.descricao}}
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -176,7 +179,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newItem">
+                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </td>
@@ -195,3 +198,5 @@
         </div>
     </div>
 </div>
+
+

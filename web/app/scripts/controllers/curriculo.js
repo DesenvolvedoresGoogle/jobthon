@@ -6,5 +6,9 @@ angular.module('appApp')
             Curriculo.getList().then(function(data) {
                 $scope.Curriculos = data;
             });
+
+            $scope.editCurriculos = function(curriculo) {
+                $scope.editCurriculo = curriculo;
+            }
         }
     ]);

@@ -10,11 +10,21 @@ angular.module('appApp')
 
             $scope.editVagas = function(vaga) {
                 $scope.editVaga = vaga;
-            }
+            };
 
             $scope.addVaga = function() {
                 $scope.Vagas.push($scope.newVaga);
                 VagaService.save($scope.newVaga);
+            };
+
+            $scope.addHabilidade = function(vaga, habilidade) {
+                vaga.habilidades.push(habilidade);
+                $scope.adicionando = false;
+            };
+
+            $scope.initNewHavilidade = function() {
+                $scope.habilidade = undefined;
+                $scope.adicionando = true;
             }
 
             $scope.AreasVagas = [{
