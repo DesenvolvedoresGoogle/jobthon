@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JobThonCliente</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="btnCadastrarCv">Cadastrar CV</string>
+    <string name="btnEditarCv">Editar CV</string>
+    <string name="btnVagas">Minhas Vagas</string>
+    <string name="home_titulo">JobThon Cliente</string>
+    <string name="formcv_titulo">Formulário CV</string>
+    <string name="cv_nome">Nome Completo</string>
+    <string name="cv_idade">Idade</string>
+    <string name="cv_habilidades">Habilidades e.g: Android, MVC, Go.</string>
+    <string name="cv_telefone">Telefone</string>
+    <string name="cv_email">E-mail</string>
+
+</resources>
