@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/editTextJobName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/label_job_name"
+        android:inputType="text|textMultiLine"
+        android:paddingBottom="10dp" >
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextAbout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/label_job_about" />
+
+    <EditText
+        android:id="@+id/editTextAbility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/label_job_ability"
+        android:inputType="text|textMultiLine"
+        android:paddingBottom="10dp" />
+
+    <Spinner
+        android:id="@+id/spinnerArea"
+        android:layout_width="match_parent"
+        android:layout_height="36dp" />
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/label_city"
+             android:paddingBottom="10dp"  >
+
+            <requestFocus />
+        </EditText>
+
+        <Spinner
+            android:id="@+id/spinner_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:text="Tipo \n de Contratação"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <CheckBox
+            android:id="@+id/checkBoxCLT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLT" />
+
+        <CheckBox
+            android:id="@+id/checkBoxPJ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PJ" />
+
+        <CheckBox
+            android:id="@+id/checkBoxEstagio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estágio" />
+
+    </TableRow>
+ 
+    <Button
+        android:id="@+id/btnSendJob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_job" />
+
+</LinearLayout>
