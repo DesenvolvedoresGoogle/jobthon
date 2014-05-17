@@ -11,6 +11,11 @@
 	<string name="label_area_about">Digite a área da vaga</string>
 	<string name="label_city">"Digite a Cidade "</string>
 	<string name="send_job">Enviar Vaga</string>
+	<string name="label_company_name">Digite o Nome da Empresa</string>
+	<string name="label_company_about">Digite Sobre a Empresa</string>
+	<string name="label_company_phone">Digite o Telefone de Contato</string>
+	<string name="label_company_email">Digite o E-Mail da Empresa</string>
+	<string name="criar_companay">Criar Empresa</string>
 	
 	
 </resources>

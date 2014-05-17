@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Job implements Serializable {
-    
+      int id;
 	  String titulo;
 	  String sobre;
 	  ArrayList<String> habilidades;
@@ -28,4 +28,19 @@ public class Job implements Serializable {
 		this.email = email;
 	}
 
+	public Job(int id, String titulo, String sobre, ArrayList<String> habilidades,
+			String area, String cidade, String estado, boolean ativa,
+			ArrayList<String> contratacao, String email) {
+		this.id = id;
+		this.titulo = titulo;
+		this.sobre = sobre;
+		this.habilidades = habilidades;
+		this.area = area;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.ativa = ativa;
+		this.contratacao = contratacao;
+		this.email = email;
+	}
+	
 }

@@ -25,32 +25,45 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnCreateJob=0x7f07000e;
-        public static final int btnSendJob=0x7f07000c;
-        public static final int checkBoxCLT=0x7f070009;
-        public static final int checkBoxEstagio=0x7f07000b;
-        public static final int checkBoxPJ=0x7f07000a;
-        public static final int editTextAbility=0x7f070002;
-        public static final int editTextAbout=0x7f070001;
-        public static final int editTextCity=0x7f070005;
-        public static final int editTextJobName=0x7f070000;
-        public static final int listViewJobs=0x7f07000d;
-        public static final int spinnerArea=0x7f070003;
-        public static final int spinner_state=0x7f070006;
+        public static final int btnCreateJob=0x7f070015;
+        public static final int btnSendJob=0x7f070013;
+        public static final int buttonCompanyCadastro=0x7f070007;
+        public static final int checkBoxCLT=0x7f070010;
+        public static final int checkBoxEstagio=0x7f070012;
+        public static final int checkBoxPJ=0x7f070011;
+        public static final int editTextAbility=0x7f07000a;
+        public static final int editTextAbout=0x7f070009;
+        public static final int editTextCity=0x7f07000c;
+        public static final int editTextCompanyAbout=0x7f070001;
+        public static final int editTextCompanyCity=0x7f070005;
+        public static final int editTextCompanyEmail=0x7f070003;
+        public static final int editTextCompanyName=0x7f070000;
+        public static final int editTextCompanyPhone=0x7f070002;
+        public static final int editTextJobName=0x7f070008;
+        public static final int listViewJobs=0x7f070014;
+        public static final int spinnerArea=0x7f07000b;
+        public static final int spinnerCompanyState=0x7f070006;
+        public static final int spinner_state=0x7f07000d;
         public static final int tableRow1=0x7f070004;
-        public static final int tableRow2=0x7f070007;
-        public static final int textView1=0x7f070008;
+        public static final int tableRow2=0x7f07000e;
+        public static final int textView1=0x7f07000f;
     }
     public static final class layout {
-        public static final int activity_createjobs=0x7f030000;
-        public static final int activity_listjobs=0x7f030001;
+        public static final int activity_create_company=0x7f030000;
+        public static final int activity_createjobs=0x7f030001;
+        public static final int activity_listjobs=0x7f030002;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
         public static final int criar_button=0x7f050003;
+        public static final int criar_companay=0x7f05000e;
         public static final int jobthon_content=0x7f050002;
         public static final int label_area_about=0x7f050007;
         public static final int label_city=0x7f050008;
+        public static final int label_company_about=0x7f05000b;
+        public static final int label_company_email=0x7f05000d;
+        public static final int label_company_name=0x7f05000a;
+        public static final int label_company_phone=0x7f05000c;
         public static final int label_job_ability=0x7f050006;
         public static final int label_job_about=0x7f050005;
         public static final int label_job_name=0x7f050004;
