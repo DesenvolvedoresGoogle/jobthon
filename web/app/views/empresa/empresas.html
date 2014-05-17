@@ -25,25 +25,25 @@
             <div class="modal-body">
 
                 <!-- Form -->
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" name="editEmpresaForm">
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Empresa</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da empresa" ng-model="editEmpresa.nome">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da empresa" ng-model="editEmpresa.nome" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editEmpresa.cidade">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editEmpresa.cidade" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
                         <div class="col-sm-10">
-                            <select ng-model="editEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea">
+                            <select ng-model="editEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" required>
                                 <option value="">-- selecionar estado --</option>
                             </select>
                         </div>
@@ -52,7 +52,7 @@
                     <div class="form-group">
                         <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" rows="6" id="inputSobre" placeholder="Sobre" ng-model="editEmpresa.sobre"></textarea>
+                            <textarea class="form-control" rows="6" id="inputSobre" placeholder="Sobre" ng-model="editEmpresa.sobre" required></textarea>
                         </div>
                     </div>
 
@@ -66,14 +66,14 @@
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="editEmpresa.email">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="editEmpresa.email" disabled>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button ng-click="saveEditEmpresa()" ng-disabled="!editEmpresaForm.$valid" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
@@ -91,25 +91,25 @@
             <div class="modal-body">
 
                 <!-- Form -->
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" name="newEmpresa">
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Empresa</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da empresa" ng-model="newEmpresa.nome">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da empresa" ng-model="newEmpresa.nome" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade da empresa" ng-model="newEmpresa.cidade">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade da empresa" ng-model="newEmpresa.cidade" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
                         <div class="col-sm-10">
-                            <select ng-model="newEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea">
+                            <select ng-model="newEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" required>
                                 <option value="">-- selecionar estado --</option>
                             </select>
                         </div>
@@ -118,28 +118,28 @@
                     <div class="form-group">
                         <label for="inputSobre" class="col-sm-2 control-label">Sobre:</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="inputSobre" rows="6" placeholder="Sobre" ng-model="newEmpresa.sobre"></textarea>
+                            <textarea class="form-control" id="inputSobre" rows="6" placeholder="Sobre" ng-model="newEmpresa.sobre" required></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Telefone:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitulo" placeholder="Telefone da empresa" ng-model="newEmpresa.telefone">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Telefone da empresa" ng-model="newEmpresa.telefone" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="newEmpresa.email">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="newEmpresa.email" required>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button ng-click="addEmpresa()"type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                <button ng-click="addEmpresa()" ng-disabled="!newEmpresa.$valid" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>

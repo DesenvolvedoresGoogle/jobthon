@@ -23,32 +23,32 @@
             </div>
             <div class="modal-body">
                 <!-- Form -->
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" name="editCurriculoForm">
                     <div class="form-group">
                         <label for="inputNome" class="col-sm-2 control-label">Nome:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputNome" placeholder="Nome" ng-model="editCurriculo.nome">
+                            <input type="text" class="form-control" id="inputNome" placeholder="Nome" ng-model="editCurriculo.nome" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputIdade" class="col-sm-2 control-label">Idade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputIdade" placeholder="Idade" ng-model="editCurriculo.idade">
+                            <input type="text" class="form-control" id="inputIdade" placeholder="Idade" ng-model="editCurriculo.idade" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editCurriculo.cidade">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editCurriculo.cidade" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
                         <div class="col-sm-10">
-                            <select ng-model="editCurriculo.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea">
+                            <select ng-model="editCurriculo.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" required>
                                 <option value="">-- selecionar estado --</option>
                             </select>
                         </div>
@@ -57,7 +57,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Telefone:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editCurriculo.telefone">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Telefone" ng-model="editCurriculo.telefone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email" ng-model="editCurriculo.email" disabled>
                         </div>
                     </div>
 
@@ -73,6 +80,22 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{habilidade}}</td>
                                     </tr>
+                                    <tr ng-if="adicionando">
+                                        <td></td>
+                                        <td>
+                                            <input type="text" ng-model="habilidade">
+                                            <button ng-click="addHabilidade(editCurriculo, habilidade)" class="btn btn-success btn-sm">+</button>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button data-ng-click="initNewHabilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                        <td></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -81,7 +104,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Apply</button>
+                <button ng-click="saveEditCurriculo()" ng-disabled="!editCurriculoForm.$valid" type="button" class="btn btn-primary" data-dismiss="modal">Apply</button>
             </div>
         </div>
     </div>
@@ -95,37 +118,37 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="editCurriculoLabel">Editar Curriculo</h4>
+                <h4 class="modal-title" id="newCurriculoLabel">Editar Curriculo</h4>
             </div>
             <div class="modal-body">
 
                 <!-- Form -->
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" role="form" name="newCurriculoForm">
                     <div class="form-group">
                         <label for="inputNome" class="col-sm-2 control-label">Nome:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputNome" placeholder="Nome" ng-model="editCurriculo.nome">
+                            <input type="text" class="form-control" id="inputNome" placeholder="Nome" ng-model="newCurriculo.nome" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputIdade" class="col-sm-2 control-label">Idade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputIdade" placeholder="Idade" ng-model="editCurriculo.idade">
+                            <input type="text" class="form-control" id="inputIdade" placeholder="Idade" ng-model="newCurriculo.idade" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editCurriculo.cidade">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="newCurriculo.cidade" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
                         <div class="col-sm-10">
-                            <select ng-model="editCurriculo.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea">
+                            <select ng-model="newCurriculo.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" required>
                                 <option value="">-- selecionar estado --</option>
                             </select>
                         </div>
@@ -134,7 +157,14 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Telefone:</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editCurriculo.telefone">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Telefone" ng-model="newCurriculo.telefone" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email" ng-model="newCurriculo.email" required>
                         </div>
                     </div>
 
@@ -146,9 +176,25 @@
 
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="habilidade in editCurriculo.habilidades">
+                                    <tr ng-repeat="habilidade in newCurriculo.habilidades">
                                         <td>{{$index + 1}}</td>
                                         <td>{{habilidade}}</td>
+                                    </tr>
+                                    <tr ng-if="adicionando">
+                                        <td></td>
+                                        <td>
+                                            <input type="text" ng-model="habilidade">
+                                            <button ng-click="addHabilidade(newCurriculo, habilidade)" class="btn btn-success btn-sm">+</button>
+                                        </td>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <button data-ng-click="initNewHabilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
+                                                <span class="glyphicon glyphicon-plus"></span>
+                                            </button>
+                                        </td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -158,7 +204,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button ng-click="addCurriculo();" ng-disabled="!newCurriculoForm.$valid" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>

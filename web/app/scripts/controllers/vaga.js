@@ -9,7 +9,7 @@ angular.module('appApp')
             });
 
             $scope.editVagas = function(vaga) {
-                $scope.editVaga = vaga;
+                $scope.editVaga = angular.copy(vaga);
                 $scope.editVaga.contratacao = {
                     'Estágio': null,
                     'PJ': null,

@@ -11,12 +11,8 @@ angular.module('appApp')
                 getList: function() {
                     return Restangular.all('curriculos').getList();
                 },
-                save: function(curriculo) {
-                    if (curriculo.id >= 0) {
-                        Restangular.one('curriculos', curriculo.id).customPUT(vaga)
-                    } else {
-                        Restangular.all('curriculos').post(curriculo);
-                    }
+                add: function(curriculo) {
+                    Restangular.all('curriculo').post(curriculo);
                 }
             };
 
