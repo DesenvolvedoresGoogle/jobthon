@@ -14,12 +14,13 @@
 
     <TextView
         android:id="@+id/porcento"
-        android:layout_width="wrap_content"
+        android:layout_width="80dip"
         android:layout_height="fill_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="6dip"
         android:ellipsize="marquee"
         android:text="81% "
+        android:textStyle="bold"
         android:textSize="20sp" />
 
     <TextView

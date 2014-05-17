@@ -2,7 +2,7 @@ package com.github.cherobin.hackthon_2014.cliente.domain;
 
 public class RetornoAnalise {
 
-	public Long compatibilidade;
+	public Float compatibilidade;
 	public String nomeEmpresa;
 	public String nomeVaga;
 }

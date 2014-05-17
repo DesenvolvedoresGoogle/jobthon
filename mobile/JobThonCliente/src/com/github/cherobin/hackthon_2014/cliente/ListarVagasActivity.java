@@ -1,5 +1,6 @@
 package com.github.cherobin.hackthon_2014.cliente;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,6 +8,7 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -38,7 +40,8 @@ public class ListarVagasActivity extends Activity {
 		ListView listViewVagas = (ListView) findViewById(R.id.listviewvagas);
 
 		VagaRepositorio vagaRep = new VagaRepositorio();
-		List<RetornoAnalise> myVagas = vagaRep.BurcarVagas();
+		List<RetornoAnalise> myVagas = vagaRep
+				.BurcarVagas(getApplicationContext());
 
 		if (myVagas == null) {
 			Toast.makeText(this, "Ocorreu um erro. Tente mais tarde!",
@@ -119,8 +122,22 @@ public class ListarVagasActivity extends Activity {
 
 			TextView porcento = (TextView) view.findViewById(R.id.porcento);
 			if (vagaAtual.compatibilidade != null
-					&& !vagaAtual.compatibilidade.equals(""))
-				porcento.setText(vagaAtual.compatibilidade.toString() + " %");
+					&& !vagaAtual.compatibilidade.equals("")) {
+
+				DecimalFormat df = new DecimalFormat();
+				df.setMaximumFractionDigits(2);
+
+				porcento.setText(df.format(vagaAtual.compatibilidade)
+						.toString() + " %");
+
+				if (vagaAtual.compatibilidade > 70)
+					porcento.setTextColor(Color.parseColor("#33CC00"));
+				else if (vagaAtual.compatibilidade > 40)
+					porcento.setTextColor(Color.parseColor("#FFCC00"));
+				else
+					porcento.setTextColor(Color.parseColor("#CC0000"));
+
+			}
 
 			TextView empresa = (TextView) view.findViewById(R.id.empresa);
 			if (vagaAtual.nomeEmpresa != null
