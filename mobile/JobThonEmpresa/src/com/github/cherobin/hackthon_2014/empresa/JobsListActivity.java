@@ -14,11 +14,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,6 +24,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.github.cherobin.hackthon_2014.VO.Company;
+import com.github.cherobin.hackthon_2014.VO.JobId;
 import com.github.cherobin.hackthon_2014.empresa.util.AppPreferences;
 import com.google.gson.Gson;
 
@@ -34,7 +33,7 @@ public class JobsListActivity extends Activity {
 
 	private ListView listViewJobs;
 	private Button btnCreateJob;
-	private List<Job_com_id> myJobsList;
+	private List<JobId> myJobsList;
 	Company comp;
 	AppPreferences preferenceCompany;
 	String email = "";
@@ -186,7 +185,15 @@ public class JobsListActivity extends Activity {
 	private void visualizar(String item, int position) {
 
 		myJobsList.get(position);
-		
+		Intent intent = new Intent(
+				JobsListActivity.this,
+				ViewJobActivity.class);
+		JobId details = myJobsList.get(position);
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("job",
+				details);
+		intent.putExtras(bundle);
+		startActivity(intent);
 		
 
 	}
@@ -201,7 +208,7 @@ public class JobsListActivity extends Activity {
 			HttpClient httpClient = new DefaultHttpClient();
 			response = httpClient.execute(getMethod);
 			String result = EntityUtils.toString(response.getEntity());
-			Job_com_id[] myJobsArray = gson.fromJson(result, Job_com_id[].class);
+			JobId[] myJobsArray = gson.fromJson(result, JobId[].class);
 			myJobsList = Arrays.asList(myJobsArray);			 
 		} catch (Exception e) { 
 		}
@@ -218,7 +225,7 @@ public class JobsListActivity extends Activity {
 			HttpClient httpClient = new DefaultHttpClient();
 			response = httpClient.execute(getMethod);
 			String result = EntityUtils.toString(response.getEntity());
-			Job_com_id[] myJobsArray = gson.fromJson(result, Job_com_id[].class);
+			JobId[] myJobsArray = gson.fromJson(result, JobId[].class);
 			myJobsList = Arrays.asList(myJobsArray);			 
 		} catch (Exception e) { 
 		}

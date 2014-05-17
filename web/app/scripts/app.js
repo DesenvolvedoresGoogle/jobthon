@@ -31,7 +31,12 @@ angular
                 .state('main.vagasanalise', {
                     url: "vagas/:id/analises",
                     templateUrl: "views/vagas/vagas.analise.html",
-                    controller: 'VagaCtrl'
+                    controller: 'AnalisevagaCtrl'
+                })
+                .state('main.curriculoanalise', {
+                    url: "curriculo/:email/analises",
+                    templateUrl: "views/curriculo/curriculo.analise.html",
+                    controller: 'AnalisecurriculoCtrl'
                 })
                 .state('main.curriculo', {
                     url: "curriculo",

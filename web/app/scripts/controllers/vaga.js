@@ -8,16 +8,16 @@ angular.module('appApp')
                 $scope.Vagas = data;
             });
 
-            $scope.editVagas = function(vaga) {
-                $scope.editVaga = angular.copy(vaga);
-                $scope.editVaga.contratacao = {
+            $scope.viewVagas = function(vaga) {
+                $scope.viewVaga = angular.copy(vaga);
+                $scope.viewVaga.contratacao = {
                     'Estágio': null,
                     'PJ': null,
                     'CLT': null
                 }
 
-                angular.forEach(vaga.contratacao, function(value, key) {
-                    $scope.editVaga.contratacao[key] = true
+                angular.forEach(vaga.contratacao, function(value) {
+                    $scope.viewVaga.contratacao[value] = true
                 });
 
             };
@@ -50,6 +50,7 @@ angular.module('appApp')
                     }
                 });
                 $scope.newVaga.contratacao = contratacao;
+                $scope.newVaga.area = $scope.newVaga.area.descricao;
                 $scope.Vagas.push($scope.newVaga);
                 VagaService.add($scope.newVaga);
             };
@@ -65,28 +66,13 @@ angular.module('appApp')
             }
 
             $scope.AreasVagas = [{
-                descricao: 'Industrial'
+                descricao: 'Programador'
             }, {
                 descricao: 'Vendas'
             }, {
-                descricao: 'Outros'
+                descricao: 'Design'
             }, {
-                descricao: 'Desenvolvimento'
+                descricao: 'Administrativo'
             }];
-
-            $scope.TipoContratacao = [{
-                descricao: 'Estagiàrio'
-            }, {
-                descricao: 'Definitivo'
-            }, {
-                descricao: 'Outros'
-            }];
-
-            $scope.VagaCurriculos = [{
-                nome: 'test'
-            }, {
-                nome: 'test'
-            }];
-
         }
     ]);
