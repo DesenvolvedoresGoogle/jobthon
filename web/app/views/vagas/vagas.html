@@ -3,60 +3,73 @@
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 <p></p>
-
-<div class="list-group" data-ng-repeat="vaga in Vagas">
-    <a href ng-click="editVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#editVaga">
+<input type="text" class="form-control" placeholder="Pesquisar" ng-model="search.valor">
+<br>
+<div class="list-group" data-ng-repeat="vaga in Vagas | filter: search.valor">
+    <a href ng-click="viewVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#viewVaga">
         <h4 class="list-group-item-heading" ng-bind="vaga.titulo">List group item heading</h4>
         <p class="list-group-item-text" ng-bind="vaga.sobre"></p>
-        <button ui-sref="main.vagasanalise({id: vaga.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Curriculos</button>
+        <button ui-sref="main.vagasanalise({id: vaga.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Analise</button>
     </a>
 </div>
 
-<!-- Edit Modal -->
-<div class="modal fade" id="editVaga" tabindex="-1" role="dialog" aria-labelledby="editVagaLabel" aria-hidden="true">
+<!-- View Modal -->
+<div class="modal fade" id="viewVaga" tabindex="-1" role="dialog" aria-labelledby="viewVagaLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="editVagaLabel">Editar Vaga</h4>
+                <h4 class="modal-title" id="viewVagaLabel">Editar Vaga</h4>
             </div>
             <div class="modal-body">
                 <!-- Form -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <label for="labelTitulo" class="col-sm-2 control-label">Email:</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="editVaga.email">
+                            <label  class="control-label" id="labelTitulo" placeholder="Email da empresa" ng-bind="viewVaga.email">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputTitulo" class="col-sm-2 control-label">Vaga</label>
+                        <label for="labelTitulo" class="col-sm-2 control-label">Vaga</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da vaga" ng-model="editVaga.titulo">
+                            <label class="control-label" id="labelTitulo" placeholder="Nome da vaga" ng-bind="viewVaga.titulo"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="labelCidade" class="col-sm-2 control-label">Cidade:</label>
+                        <div class="col-sm-10">
+                            <label class="control-label" id="labelCidade" placeholder="Cidade" ng-bind="viewVaga.cidade"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="labelEstado" class="col-sm-2 control-label">Estado:</label>
+                        <div class="col-sm-10">
+                            <label class="control-label" id="labelEstado" placeholder="Cidade" ng-bind="viewVaga.estado"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="inputSobre" placeholder="Sobre" ng-model="editVaga.sobre"></textarea>
+                            <p id="inputSobre" ng-bind="viewVaga.sobre"></p>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
+                        <label for="labelArea" class="col-sm-2 control-label">Area da Vaga</label>
                         <div class="col-sm-10">
-                            <select ng-model="editVaga.area" ng-options="area.descricao for area in AreasVagas" class="form-control" id="selectArea">
-                                <option value="">-- selecionar area --</option>
-                            </select>
+                            <label class="control-label" id="labelArea" placeholder="Cidade" ng-bind="viewVaga.area"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="selectArea" class="col-sm-2 control-label">Tipo contrato</label>
                         <div class="col-sm-10">
-                            Estágio <input type="checkbox" ng-model="editVaga.contratacao['Estágio']">
-                            PJ <input type="checkbox" ng-model="editVaga.contratacao['PJ']">
-                            CLT <input type="checkbox" ng-model="editVaga.contratacao['CLT']">
+                            Estágio <input type="checkbox" ng-model="viewVaga.contratacao['Estágio']" disabled>
+                            PJ <input type="checkbox" ng-model="viewVaga.contratacao['PJ']" disabled>
+                            CLT <input type="checkbox" ng-model="viewVaga.contratacao['CLT']" disabled>
                         </div>
                     </div>
 
@@ -64,7 +77,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input ng-model="editVaga.ativa" type="checkbox">Ativa
+                                    <input ng-model="viewVaga.ativa" type="checkbox" disabled>Ativa
                                 </label>
                             </div>
                         </div>
@@ -78,25 +91,9 @@
 
                                 </thead>
                                 <tbody>
-                                    <tr ng-repeat="habilidade in editVaga.habilidades">
+                                    <tr ng-repeat="habilidade in viewVaga.habilidades">
                                         <td>{{$index + 1}}</td>
                                         <td>{{habilidade}}</td>
-                                    </tr>
-                                    <tr ng-if="adicionando">
-                                        <td></td>
-                                        <td>
-                                            <input type="text" ng-model="habilidade">
-                                            <button ng-click="addHabilidade(editVaga, habilidade)" class="btn btn-success btn-sm">+</button>
-                                        </td>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
-                                                <span class="glyphicon glyphicon-plus"></span>
-                                            </button>
-                                        </td>
-                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -105,8 +102,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Ok</button>
+                <!-- <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button> -->
             </div>
         </div>
     </div>
@@ -135,6 +132,22 @@
                         <label for="inputTitulo" class="col-sm-2 control-label">Vaga</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da vaga" ng-model="newVaga.titulo">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="newVaga.cidade" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
+                        <div class="col-sm-10">
+                            <select ng-model="newVaga.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" required>
+                                <option value="">-- selecionar estado --</option>
+                            </select>
                         </div>
                     </div>
 
