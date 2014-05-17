@@ -57,7 +57,6 @@ public class FormCvActivity extends Activity {
 		Gson gson = new Gson();
 		CV cvFromShared = gson.fromJson(strCv, CV.class);
 
-		// popular campos da tela;
 		EditText nome = ((EditText) findViewById(R.id.editTextName));
 		nome.setText(cvFromShared.nome);
 
