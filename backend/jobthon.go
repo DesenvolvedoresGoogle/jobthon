@@ -47,7 +47,7 @@ type Empresa struct {
 }
 
 type Vaga struct {
-	Id          int64    `json:"id" datastore:"-"`
+	Id          int64    `json:"id"`
 	Email       string   `json:"email"`
 	Titulo      string   `json:"titulo"`
 	Sobre       string   `json:"sobre"`
@@ -454,7 +454,7 @@ func matchSuperDesinteressante(necessidades, capacidades []string, a *Analise, c
 	capacidadesEncontradas := 0.0
 	for _, necessidade := range necessidades {
 		for _, capacidade := range capacidades {
-			if strings.ToLower(necessidade) == strings.ToLower(capacidade) {
+			if corrigirString(necessidade) == corrigirString(capacidade) {
 				capacidadesEncontradas = capacidadesEncontradas + 1.0
 				continue
 			}
@@ -465,4 +465,10 @@ func matchSuperDesinteressante(necessidades, capacidades []string, a *Analise, c
 	if err := a.Salvar(c); err != nil {
 		log.Println(err)
 	}
+}
+
+func corrigirString(str string) string {
+	correctedStr := strings.ToLower(str)
+	correctedStr = strings.Trim(correctedStr, ". ")
+	return correctedStr
 }
