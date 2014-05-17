@@ -3,12 +3,12 @@
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 <p></p>
-
-<div class="list-group" data-ng-repeat="empresa in Empresas">
+<input type="text" class="form-control" placeholder="Pesquisar" ng-model="search.valor">
+<br>
+<div class="list-group" data-ng-repeat="empresa in Empresas |filter:search.valor">
     <a href ng-click="editEmpresas(empresa)" class="list-group-item" data-toggle="modal" data-target="#editEmpresa">
         <h4 class="list-group-item-heading" ng-bind="empresa.nome">List group item heading</h4>
         <p class="list-group-item-text" ng-bind="empresa.sobre.substr(0,100)"><div ng-if="empresa.sobre.length > 100">...</div></p>
-        <button ui-sref="main.empresasvagas({id: empresa.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Vagas</button>
     </a>
 </div>
 

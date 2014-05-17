@@ -35,6 +35,7 @@ public class HomeActivity extends Activity {
 						: View.GONE);
 		editarCv.setVisibility(_appPrefs.getCvCadastrado().equals("") ? View.GONE
 				: View.VISIBLE);
+
 	}
 
 	public void onClickBtnCadastrarCv(View v) {
@@ -49,8 +50,13 @@ public class HomeActivity extends Activity {
 	}
 
 	public void onClickBtnVagas(View v) {
-		Toast.makeText(this, "Clicked on Button - Minhas Vagas",
-				Toast.LENGTH_LONG).show();
+		if (_appPrefs.getCvCadastrado().equals("")) {
+			Toast.makeText(this, "Cadastre seu CV para ver suas vagas!",
+					Toast.LENGTH_LONG).show();
+		}
+
+		Intent myIntent = new Intent(HomeActivity.this, ListarVagasActivity.class);
+		HomeActivity.this.startActivity(myIntent);
 	}
 
 }

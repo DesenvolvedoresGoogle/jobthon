@@ -3,14 +3,16 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Nome do candidato</th>
+            <th>Nome da Empresa</th>
+            <th>Nome da Vaga</th>
             <th>Compatibilidade</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="analise in AnaliseVagas">
+        <tr ng-repeat="analise in AnaliseCurriculo">
             <td>{{$index + 1}}</td>
-            <td>{{analise.nomeCurriculo}}</td>
+            <td>{{analise.nomeEmpresa}}</td>
+            <td>{{analise.nomeVaga}}</td>
             <td>{{analise.compatibilidade}}%</td>
         </tr>
     </tbody>

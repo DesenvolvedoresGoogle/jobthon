@@ -3,11 +3,13 @@
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 <p></p>
-
-<div class="list-group" data-ng-repeat="curriculo in Curriculos">
+<input type="text" class="form-control" placeholder="Pesquisar" ng-model="search.valor">
+<br>
+<div class="list-group" data-ng-repeat="curriculo in Curriculos | filter:search.valor">
     <a href ng-click="editCurriculos(curriculo)" class="list-group-item" data-toggle="modal" data-target="#editCurriculo">
         <h4 class="list-group-item-heading" ng-bind="curriculo.nome">List group item heading</h4>
         <p class="list-group-item-text" ng-bind="curriculo.sobre"></p>
+        <button ui-sref="main.curriculoanalise({email: curriculo.email} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Analise</button>
     </a>
 </div>
 
