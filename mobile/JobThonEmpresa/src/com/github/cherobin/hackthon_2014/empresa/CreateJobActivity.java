@@ -107,7 +107,23 @@ public class CreateJobActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				createJob();
+				
+				if(jobNome.getText().toString().equals("")||
+						jobAbout.getText().toString().equals("")|| selectState.equals("ESTADO")|| jobCity
+								.getText().toString().equals("")|| jobAbility.getText()
+								.toString().equals("")|| selectArea.equals("ÁREA")
+								||(jobCLT.isChecked()==false&&
+									jobPJ.isChecked()==false&&
+								    jobEstagio.isChecked()==false
+										) ){
+					
+							Toast.makeText(getApplicationContext(), "Error ao cadastrar. Todos os Campos Obrigatórios",
+									Toast.LENGTH_LONG).show();
+						}else{								
+							createJob();
+						}
+				
+				
 			}
 		});
 
@@ -228,7 +244,7 @@ public class CreateJobActivity extends Activity {
 			}
 		}
 
-		String[] areas = new String[] { "Área", "Programador", "Design",
+		String[] areas = new String[] { "ÁREA", "Programador", "Design",
 				"Vendas", "Administrativo" };
 
 		for (int i = 0; i < areas.length; i++) {
@@ -254,7 +270,7 @@ public class CreateJobActivity extends Activity {
 
 	private void setJobAreaSpinner() {
 		ArrayAdapter<String> adaptadorSpinner = new ArrayAdapter<String>(this,
-				android.R.layout.simple_spinner_item, new String[] { "Área",
+				android.R.layout.simple_spinner_item, new String[] { "Ã�rea",
 						"Programador", "Design", "Vendas", "Administrativo" });
 
 		jobArea.setAdapter(adaptadorSpinner);
