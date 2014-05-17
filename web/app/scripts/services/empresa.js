@@ -11,12 +11,8 @@ angular.module('appApp')
                 getList: function() {
                     return Restangular.all('empresas').getList();
                 },
-                save: function(empresa) {
-                    if (empresa.id >= 0) {
-                        Restangular.one('empresa', empresa.id).customPUT(empresa)
-                    } else {
-                        Restangular.all('empresas').post(empresa);
-                    }
+                add: function(empresa) {
+                    Restangular.all('empresa').post(empresa);
                 }
             }
         }
