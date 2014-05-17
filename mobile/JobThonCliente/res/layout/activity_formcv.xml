@@ -1,7 +1,77 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.github.cherobin.hackthon_2014.cliente.FormCvActivity"
-    tools:ignore="MergeRootFrame" />
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/cv_nome"
+        android:inputType="textPersonName" >
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextIdade"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/cv_idade"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/editTextHabilidades"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/cv_habilidades"
+        android:inputType="textMultiLine" />
+
+    <EditText
+        android:id="@+id/editTextTelefone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/cv_telefone"
+        android:inputType="phone" />
+
+    <EditText
+        android:id="@+id/editTextEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/cv_email"
+        android:inputType="textEmailAddress" />
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <EditText
+            android:id="@+id/editTextCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/cv_cidade"
+            android:paddingBottom="10dp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Spinner
+            android:id="@+id/spinner_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </TableRow>
+    
+    <Button
+            android:id="@+id/btnSalvarCv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:onClick="onClickBtnSalvarCv"
+            android:text="@string/btnSalvarCv"/>
+
+</LinearLayout>

@@ -14,5 +14,8 @@
     <string name="cv_habilidades">Habilidades e.g: Android, MVC, Go.</string>
     <string name="cv_telefone">Telefone</string>
     <string name="cv_email">E-mail</string>
+    
+    <string name="cv_cidade">Cidade</string>
+    <string name="btnSalvarCv">Salvar</string>
 
 </resources>

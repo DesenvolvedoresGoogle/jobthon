@@ -24,6 +24,12 @@
                 <!-- Form -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="editVaga.email">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Vaga</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da vaga" ng-model="editVaga.titulo">
@@ -39,22 +45,18 @@
                     <div class="form-group">
                         <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="selectArea">
-                                <option ng-repeat="area in AreasVagas">
-                                    {{area.descricao}}
-                                </option>
+                            <select ng-model="editVaga.area" ng-options="area.descricao for area in AreasVagas" class="form-control" id="selectArea">
+                                <option value="">-- selecionar area --</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
+                        <label for="selectArea" class="col-sm-2 control-label">Tipo contrato</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="selectArea">
-                                <option ng-repeat="tipo in TipoContratacao">
-                                    {{tipo.descricao}}
-                                </option>
-                            </select>
+                            Estágio <input type="checkbox" ng-model="editVaga.contratacao['Estágio']">
+                            PJ <input type="checkbox" ng-model="editVaga.contratacao['PJ']">
+                            CLT <input type="checkbox" ng-model="editVaga.contratacao['CLT']">
                         </div>
                     </div>
 
@@ -62,7 +64,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox">Aberta
+                                    <input ng-model="editVaga.ativa" type="checkbox">Ativa
                                 </label>
                             </div>
                         </div>
@@ -82,7 +84,11 @@
                                     </tr>
                                     <tr ng-if="adicionando">
                                         <td></td>
-                                        <td><input type="text" ng-model="habilidade"><button ng-click="addHabilidade(editVaga, habilidade)"class="btn btn-success btn-sm">+</button></td></td>
+                                        <td>
+                                            <input type="text" ng-model="habilidade">
+                                            <button ng-click="addHabilidade(editVaga, habilidade)" class="btn btn-success btn-sm">+</button>
+                                        </td>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -100,7 +106,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
@@ -118,8 +124,13 @@
             <div class="modal-body">
 
                 <!-- Form -->
-                <!-- Form -->
                 <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="newVaga.email">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Vaga</label>
                         <div class="col-sm-10">
@@ -136,22 +147,18 @@
                     <div class="form-group">
                         <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="selectArea">
-                                <option ng-repeat="area in AreasVagas">
-                                    {{area.descricao}}
-                                </option>
+                            <select ng-model="newVaga.area" ng-options="area.descricao for area in AreasVagas" class="form-control" id="selectArea">
+                                <option value="">-- selecionar area --</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="selectArea" class="col-sm-2 control-label">Area da Vaga</label>
+                        <label class="col-sm-2 control-label">Tipo contrato</label>
                         <div class="col-sm-10">
-                            <select class="form-control" id="selectArea">
-                                <option ng-repeat="tipo in TipoContratacao">
-                                    {{tipo.descricao}}
-                                </option>
-                            </select>
+                            Estágio <input type="checkbox" ng-model="newVaga.contratacao['Estágio']">
+                            PJ <input type="checkbox" ng-model="newVaga.contratacao['PJ']">
+                            CLT <input type="checkbox" ng-model="newVaga.contratacao['CLT']">
                         </div>
                     </div>
 
@@ -159,7 +166,7 @@
                         <div class="col-sm-offset-2 col-sm-10">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox">Aberta
+                                    <input ng-model="newVaga.ativa" type="checkbox">Ativa
                                 </label>
                             </div>
                         </div>
@@ -177,6 +184,14 @@
                                         <td>{{$index + 1}}</td>
                                         <td>{{habilidade}}</td>
                                     </tr>
+                                    <tr ng-if="adicionando">
+                                        <td></td>
+                                        <td>
+                                            <input type="text" ng-model="habilidade">
+                                            <button ng-click="addHabilidade(newVaga, habilidade)" class="btn btn-success btn-sm">+</button>
+                                        </td>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td>
                                             <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
@@ -193,10 +208,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button ng-click="addVaga()" type="button" class="btn btn-primary">Save changes</button>
+                <button ng-click="addVaga()" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-
-
