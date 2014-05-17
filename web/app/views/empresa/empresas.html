@@ -1,0 +1,146 @@
+<h3>Empresas</h3>
+<button data-ng-click="initNewEmpresa()" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newEmpresa">
+    <span class="glyphicon glyphicon-plus"></span>
+</button>
+<p></p>
+
+<div class="list-group" data-ng-repeat="empresa in Empresas">
+    <a href ng-click="editEmpresas(empresa)" class="list-group-item" data-toggle="modal" data-target="#editEmpresa">
+        <h4 class="list-group-item-heading" ng-bind="empresa.nome">List group item heading</h4>
+        <p class="list-group-item-text" ng-bind="empresa.sobre.substr(0,100)"><div ng-if="empresa.sobre.length > 100">...</div></p>
+        <button ui-sref="main.empresasvagas({id: empresa.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Vagas</button>
+    </a>
+</div>
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editEmpresa" tabindex="-1" role="dialog" aria-labelledby="editEmpresaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="editEmpresaLabel">Editar Empresa</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- Form -->
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Empresa</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da empresa" ng-model="editEmpresa.nome">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade" ng-model="editEmpresa.cidade">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
+                        <div class="col-sm-10">
+                            <select ng-model="editEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea">
+                                <option value="">-- selecionar estado --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" rows="6" id="inputSobre" placeholder="Sobre" ng-model="editEmpresa.sobre"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Telefone:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Telefone da empresa" ng-model="editEmpresa.telefone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="editEmpresa.email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- New Modal -->
+<div class="modal fade" id="newEmpresa" tabindex="-1" role="dialog" aria-labelledby="newEmpresaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="newEmpresaLabel">Nova Empresa</h4>
+            </div>
+            <div class="modal-body">
+
+                <!-- Form -->
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Empresa</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Nome da empresa" ng-model="newEmpresa.nome">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade" class="col-sm-2 control-label">Cidade:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputCidade" placeholder="Cidade da empresa" ng-model="newEmpresa.cidade">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
+                        <div class="col-sm-10">
+                            <select ng-model="newEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea">
+                                <option value="">-- selecionar estado --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputSobre" class="col-sm-2 control-label">Sobre:</label>
+                        <div class="col-sm-10">
+                            <textarea class="form-control" id="inputSobre" rows="6" placeholder="Sobre" ng-model="newEmpresa.sobre"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Telefone:</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputTitulo" placeholder="Telefone da empresa" ng-model="newEmpresa.telefone">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputTitulo" class="col-sm-2 control-label">Email:</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputTitulo" placeholder="Email da empresa" ng-model="newEmpresa.email">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>

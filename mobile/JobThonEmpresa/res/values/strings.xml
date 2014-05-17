@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">JobThonEmpresa</string>
+    <string name="vagas_button">Vagas</string>
+    <string name="jobthon_content">JOB\nTHON</string>
+	<string name="criar_button">Criar Vaga</string>
+	<string name="label_job_name">Digite o Nome da Vaga</string>
+	<string name="label_job_about">Digite sobre o que é a vaga</string>
+	<string name="label_job_ability">Habilidades e.g: Android, MVC, Go.</string>	
+	<string name="label_area_about">Digite a área da vaga</string>
+	<string name="label_city">"Digite a Cidade "</string>
+	<string name="send_job">Enviar Vaga</string>
+	
+	
+</resources>
