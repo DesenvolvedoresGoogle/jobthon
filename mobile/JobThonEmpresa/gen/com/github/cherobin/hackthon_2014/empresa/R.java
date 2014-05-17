@@ -41,18 +41,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int editTextCompanyPhone=0x7f070002;
         public static final int editTextJobName=0x7f070008;
         public static final int listViewJobs=0x7f070014;
+        public static final int listViewViewJobs=0x7f070016;
+        public static final int progressBarJobs=0x7f070017;
         public static final int spinnerArea=0x7f07000b;
         public static final int spinnerCompanyState=0x7f070006;
         public static final int spinner_state=0x7f07000d;
         public static final int tableRow1=0x7f070004;
         public static final int tableRow2=0x7f07000e;
-        public static final int textView1=0x7f07000f;
+        public static final int textViewListClientName=0x7f07000f;
     }
     public static final class layout {
         public static final int activity_create_company=0x7f030000;
         public static final int activity_createjobs=0x7f030001;
         public static final int activity_listjobs=0x7f030002;
         public static final int activity_view_job=0x7f030003;
+        public static final int item_jobs=0x7f030004;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
@@ -131,7 +134,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.github.cherobin.hackthon_2014.empresa:buttonBarButtonStyle
+          @attr name android:buttonBarButtonStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarButtonStyle = 1;
         /**
@@ -141,7 +144,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name com.github.cherobin.hackthon_2014.empresa:buttonBarStyle
+          @attr name android:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
     };

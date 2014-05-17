@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.github.cherobin.hackthon_2014.VO.Company;
 import com.github.cherobin.hackthon_2014.empresa.util.AppPreferences;
 import com.google.gson.Gson;
 
