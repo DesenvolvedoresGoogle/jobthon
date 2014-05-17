@@ -262,20 +262,6 @@ func addCurriculo(c appengine.Context, r render.Render, req *http.Request) {
 		return
 	}
 
-	q := datastore.NewQuery("Curriculo").Filter("Email =", curriculo.Email)
-	size, err := q.Count(c)
-	if err != nil {
-		log.Println(err)
-		r.JSON(http.StatusInternalServerError, err.Error())
-		return
-	}
-	if size > 0 {
-		err = errors.New("curriculo: já há um currículo com este email cadastrado")
-		log.Println(err)
-		r.JSON(http.StatusInternalServerError, err.Error())
-		return
-	}
-
 	key := datastore.NewKey(c, "Curriculo", curriculo.Email, 0, nil)
 	_, err = datastore.Put(c, key, curriculo)
 	if err != nil {
