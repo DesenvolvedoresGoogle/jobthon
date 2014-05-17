@@ -52,6 +52,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_create_company=0x7f030000;
         public static final int activity_createjobs=0x7f030001;
         public static final int activity_listjobs=0x7f030002;
+        public static final int activity_view_job=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f050000;
@@ -130,7 +131,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:buttonBarButtonStyle
+          @attr name com.github.cherobin.hackthon_2014.empresa:buttonBarButtonStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarButtonStyle = 1;
         /**
@@ -140,7 +141,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
 
           <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
-          @attr name android:buttonBarStyle
+          @attr name com.github.cherobin.hackthon_2014.empresa:buttonBarStyle
         */
         public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
     };

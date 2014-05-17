@@ -34,7 +34,7 @@ public class JobsListActivity extends Activity {
 
 	private ListView listViewJobs;
 	private Button btnCreateJob;
-	private List<Job> myJobsList;
+	private List<Job_com_id> myJobsList;
 	Company comp;
 	AppPreferences preferenceCompany;
 	String email = "";
@@ -70,7 +70,7 @@ public class JobsListActivity extends Activity {
 
 		
 		final ArrayList<String> list = new ArrayList<String>();
-		if(myJobsList!=null)
+ 		if(myJobsList!=null)
 		for (int i = 0; i < myJobsList.size(); ++i) {
 			list.add(myJobsList.get(i).titulo);
 		}
@@ -111,58 +111,68 @@ public class JobsListActivity extends Activity {
 
 						alertDialog.setTitle(item);
 
-						// alertDialog.setMessage("This is a three-button dialog!");
+//						alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+//								"Deletar",
+//								new DialogInterface.OnClickListener() {
+//
+//									public void onClick(DialogInterface dialog,
+//											int id) {
+//
+//										view.animate().setDuration(2000)
+//												.alpha(0)
+//												.withEndAction(new Runnable() {
+//													@Override
+//													public void run() {
+//														list.remove(item);
+//
+//														adapter.notifyDataSetChanged();
+//														view.setAlpha(1);
+//													}
+//												});
+//									}
+//								});
+
+//						alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+//								"Editar",
+//								new DialogInterface.OnClickListener() {
+//
+//									public void onClick(DialogInterface dialog,
+//											int id) {
+//										Intent intent = new Intent(
+//												JobsListActivity.this,
+//												CreateJobActivity.class);
+//
+//										Job_com_id details = myJobsList.get(position);
+//
+//										Bundle bundle = new Bundle();
+//										bundle.putSerializable("job",
+//												details);
+//										intent.putExtras(bundle);
+//
+//										startActivity(intent);
+//
+//									}
+//								});
 
 						alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
-								"Deletar",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-											int id) {
-
-										view.animate().setDuration(2000)
-												.alpha(0)
-												.withEndAction(new Runnable() {
-													@Override
-													public void run() {
-														list.remove(item);
-
-														adapter.notifyDataSetChanged();
-														view.setAlpha(1);
-													}
-												});
-									}
-								});
-
-						alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
-								"Editar",
-								new DialogInterface.OnClickListener() {
-
-									public void onClick(DialogInterface dialog,
-											int id) {
-										Intent intent = new Intent(
-												JobsListActivity.this,
-												CreateJobActivity.class);
-
-										Job details = myJobsList.get(position);
-
-										Bundle bundle = new Bundle();
-										bundle.putSerializable("job",
-												details);
-										intent.putExtras(bundle);
-
-										startActivity(intent);
-
-									}
-								});
-
-						alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
 								"Visualizar",
 								new DialogInterface.OnClickListener() {
 
 									public void onClick(DialogInterface dialog,
 											int id) {
 										visualizar(item, position);
+
+									}
+
+								});
+						
+						alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+								"Sair",
+								new DialogInterface.OnClickListener() {
+
+									public void onClick(DialogInterface dialog,
+											int id) {
+									 
 
 									}
 
@@ -176,6 +186,8 @@ public class JobsListActivity extends Activity {
 	private void visualizar(String item, int position) {
 
 		myJobsList.get(position);
+		
+		
 
 	}
 
@@ -184,19 +196,44 @@ public class JobsListActivity extends Activity {
 		Gson gson = new Gson();
 
 		HttpResponse response = null;
-		HttpGet getMethod = new HttpGet("http://gdgjobthom.appspot.com/vagas/"
-				+ email.toString());		 
+		HttpGet getMethod = new HttpGet("http://gdgjobthom.appspot.com/vagas/"+email);		 
 		try {
 			HttpClient httpClient = new DefaultHttpClient();
 			response = httpClient.execute(getMethod);
 			String result = EntityUtils.toString(response.getEntity());
-			Job[] myJobsArray = gson.fromJson(result, Job[].class);
+			Job_com_id[] myJobsArray = gson.fromJson(result, Job_com_id[].class);
 			myJobsList = Arrays.asList(myJobsArray);			 
-		} catch (Exception e) {
-			Log.e("Error ---------",e.getMessage());
+		} catch (Exception e) { 
 		}
 	}
 
-	 
+	@Override
+	public void onResume(){
+		super.onResume();
+		Gson gson = new Gson();
+
+		HttpResponse response = null;
+		HttpGet getMethod = new HttpGet("http://gdgjobthom.appspot.com/vagas/"+email);		 
+		try {
+			HttpClient httpClient = new DefaultHttpClient();
+			response = httpClient.execute(getMethod);
+			String result = EntityUtils.toString(response.getEntity());
+			Job_com_id[] myJobsArray = gson.fromJson(result, Job_com_id[].class);
+			myJobsList = Arrays.asList(myJobsArray);			 
+		} catch (Exception e) { 
+		}
+		
+
+		final ArrayList<String> list = new ArrayList<String>();
+ 		if(myJobsList!=null)
+		for (int i = 0; i < myJobsList.size(); ++i) {
+			list.add(myJobsList.get(i).titulo);
+		}
+
+		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+				android.R.layout.simple_list_item_1, list);
+		listViewJobs.setAdapter(adapter);
+
+	}
 
 }
