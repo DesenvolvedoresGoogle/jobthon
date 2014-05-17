@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -41,6 +42,11 @@ public class CreateJobActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_createjobs);
 
+	    if (android.os.Build.VERSION.SDK_INT > 9) {
+	        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+	        StrictMode.setThreadPolicy(policy);
+	      }
+	    
 		state = (Spinner) findViewById(R.id.spinner_state);
 
 		 jobNome = (EditText) findViewById(R.id.editTextJobName);     
@@ -55,6 +61,7 @@ public class CreateJobActivity extends Activity {
 		 setStateSpinner();
 		 setJobAreaSpinner();
 		 
+		 
 		 state.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 			    	selectState = (String) parent.getItemAtPosition(pos);
@@ -63,6 +70,7 @@ public class CreateJobActivity extends Activity {
 			    }
 			});
 		 
+		 
 		 jobArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 			    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
 			    	selectArea = (String) parent.getItemAtPosition(pos);
@@ -70,6 +78,57 @@ public class CreateJobActivity extends Activity {
 			    public void onNothingSelected(AdapterView<?> parent) {
 			    }
 			});
+		 
+		 Job myObject = (Job) getIntent().getExtras().getSerializable("object");
+		 
+		 
+		 if(myObject!=null){
+			 jobNome.setText(myObject.titulo);
+			 jobAbout.setText(myObject.sobre);			 
+			 jobCity.setText(myObject.cidade);
+			 jobAbility.setText(myObject.habilidades.toString().replace("[", "").replace("]", ""));
+			 
+			 for (int i = 0; i < myObject.contratacao.size(); i++) {
+				 if(myObject.contratacao.get(i).equalsIgnoreCase("CLT")){
+					 jobCLT.setChecked(true);
+				 }
+				 
+				 if(myObject.contratacao.get(i).equalsIgnoreCase("PJ")){
+					 jobPJ.setChecked(true);
+				 }
+				 
+				 if(myObject.contratacao.get(i).equalsIgnoreCase("Estágio")){
+					 jobEstagio.setChecked(true);
+				 }
+			}
+			 
+//			 myObject.estado
+			 
+			 String[] states = new String[] { "ESTADO", "AC",
+						"AL", "AM", "AP", "BA", "CE", "DF", "ES", "GO", "MA",
+						"MG", "MS", "MT", "PA", "PB", "PE", "PI", "PR", "RJ",
+						"RN", "RO", "RS", "SC", "SE", "SP", "TO" };
+			 
+			 for (int i = 0; i < states.length; i++) {
+				if(myObject.estado.equals(states[i])){
+					 state.setSelection(i);
+					 break;
+				}
+			}
+			 
+			 String[] areas = new String[] { "Área", "Programador","Design", "Vendas", "Administrativo"};
+			 
+			 for (int i = 0; i < areas.length; i++) {
+					if(myObject.area.equals(areas[i])){
+						jobArea.setSelection(i);
+						 break;
+					}
+				}
+			
+		 }
+		 
+ 
+	
 		 
 		 btnSend.setOnClickListener(new OnClickListener() {
 			
@@ -128,7 +187,7 @@ public class CreateJobActivity extends Activity {
 			String response = null;
 			String parameters = gjobText;
 			try {
-				url = new URL("");
+				url = new URL("http://gdgjobthom.appspot.com/empresa");
 				connection = (HttpURLConnection) url.openConnection();
 				connection.setDoOutput(true);
 				connection.setRequestProperty("Content-Type",
@@ -150,7 +209,7 @@ public class CreateJobActivity extends Activity {
 
 				response = sb.toString();
 
-				if (response.contains("Y")) {
+				if (response.contains("Sucess")) {
 //					handler.sendEmptyMessage(1);
 				} else {
 //					handler.sendEmptyMessage(2);
@@ -175,6 +234,7 @@ public class CreateJobActivity extends Activity {
 						"RN", "RO", "RS", "SC", "SE", "SP", "TO" });
 
 		state.setAdapter(adaptadorSpinner);
+	 
 		 
 	}
 	

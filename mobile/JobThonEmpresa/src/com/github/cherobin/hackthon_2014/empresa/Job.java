@@ -1,8 +1,9 @@
 package com.github.cherobin.hackthon_2014.empresa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Job {
+public class Job implements Serializable {
     
 	  String titulo;
 	  String sobre;
