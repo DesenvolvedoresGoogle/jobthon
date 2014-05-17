@@ -10,9 +10,22 @@ angular.module('appApp')
             }
             init();
 
+            $scope.initNewEmpresa = function() {
+                $scope.newEmpresa = angular.copy({
+                    "email": null,
+                    "telefone": null,
+                    "nome": null,
+                    "cidade": null,
+                    "estado": null,
+                    "sobre": null
+                });
+            };
+
+
+
             $scope.editEmpresas = function(empresa) {
                 $scope.editEmpresa = angular.copy(empresa);
-            }
+            };
 
             $scope.addEmpresa = function() {
                 $scope.Empresas.push($scope.newEmpresa);

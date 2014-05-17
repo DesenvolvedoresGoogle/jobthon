@@ -5,11 +5,18 @@
 <p></p>
 <input type="text" class="form-control" placeholder="Pesquisar" ng-model="search.valor">
 <br>
-<div class="list-group" data-ng-repeat="empresa in Empresas |filter:search.valor">
-    <a href ng-click="editEmpresas(empresa)" class="list-group-item" data-toggle="modal" data-target="#editEmpresa">
-        <h4 class="list-group-item-heading" ng-bind="empresa.nome">List group item heading</h4>
-        <p class="list-group-item-text" ng-bind="empresa.sobre.substr(0,100)"><div ng-if="empresa.sobre.length > 100">...</div></p>
-    </a>
+<div ng-if="!Empresas.length">
+    <img src="images/ajax-loader.gif" style="display: block;margin-left: auto;margin-right: auto;">
+</div>
+<div ng-if="Empresas.length">
+    <div class="list-group" data-ng-repeat="empresa in Empresas |filter:search.valor">
+        <a href ng-click="editEmpresas(empresa)" class="list-group-item" data-toggle="modal" data-target="#editEmpresa">
+            <h4 class="list-group-item-heading" ng-bind="empresa.nome">List group item heading</h4>
+            <p class="list-group-item-text" ng-bind="empresa.sobre.substr(0,100)">
+                <div ng-if="empresa.sobre.length > 100">...</div>
+            </p>
+        </a>
+    </div>
 </div>
 
 
@@ -109,7 +116,7 @@
                     <div class="form-group">
                         <label for="inputCidade" class="col-sm-2 control-label">Estado:</label>
                         <div class="col-sm-10">
-                            <select ng-model="newEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" required>
+                            <select ng-model="newEmpresa.estado" ng-options="uf for uf in Estados" class="form-control" id="selectArea" >
                                 <option value="">-- selecionar estado --</option>
                             </select>
                         </div>
@@ -139,7 +146,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button ng-click="addEmpresa()" ng-disabled="!newEmpresa.$valid" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                <button ng-click="addEmpresa()" type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
             </div>
         </div>
     </div>

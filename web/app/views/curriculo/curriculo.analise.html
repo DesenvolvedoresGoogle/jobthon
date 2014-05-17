@@ -1,19 +1,24 @@
 <h3>Analise</h3>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nome da Empresa</th>
-            <th>Nome da Vaga</th>
-            <th>Compatibilidade</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="analise in AnaliseCurriculo">
-            <td>{{$index + 1}}</td>
-            <td>{{analise.nomeEmpresa}}</td>
-            <td>{{analise.nomeVaga}}</td>
-            <td>{{analise.compatibilidade}}%</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-if="!AnaliseCurriculo.length">
+    <h4>Ainda não á analise por aqui</h4>
+</div>
+<div ng-if="AnaliseCurriculo.length">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome da Empresa</th>
+                <th>Nome da Vaga</th>
+                <th>Compatibilidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="analise in AnaliseCurriculo">
+                <td>{{$index + 1}}</td>
+                <td>{{analise.nomeEmpresa}}</td>
+                <td>{{analise.nomeVaga}}</td>
+                <td>{{analise.compatibilidade | number:2}}%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -12,7 +12,15 @@ angular
     .config(['$stateProvider', '$urlRouterProvider', 'RestangularProvider',
         function($stateProvider, $urlRouterProvider, RestangularProvider) {
             RestangularProvider.setBaseUrl('http://gdgjobthom.appspot.com/');
-
+            RestangularProvider.addResponseInterceptor(function(element, operation) {
+                var elementArray = [];
+                if (operation === 'getList') {
+                    if (element === "null") {
+                        element = [];
+                    }
+                }
+                return element;
+            })
             //
             // For any unmatched url, redirect to /state1
             $urlRouterProvider.otherwise("/");
@@ -22,6 +30,10 @@ angular
                 .state('main', {
                     url: "/",
                     templateUrl: "views/main.html"
+                })
+                .state('main.home', {
+                    url: "/",
+                    templateUrl: "views/home.html"
                 })
                 .state('main.vagas', {
                     url: "vagas",

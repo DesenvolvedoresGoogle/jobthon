@@ -3,14 +3,20 @@
     <span class="glyphicon glyphicon-plus"></span>
 </button>
 <p></p>
+
 <input type="text" class="form-control" placeholder="Pesquisar" ng-model="search.valor">
 <br>
-<div class="list-group" data-ng-repeat="vaga in Vagas | filter: search.valor">
-    <a href ng-click="viewVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#viewVaga">
-        <h4 class="list-group-item-heading" ng-bind="vaga.titulo">List group item heading</h4>
-        <p class="list-group-item-text" ng-bind="vaga.sobre"></p>
-        <button ui-sref="main.vagasanalise({id: vaga.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Analise</button>
-    </a>
+<div ng-if="!Vagas.length">
+    <img src="images/ajax-loader.gif" style="display: block;margin-left: auto;margin-right: auto;">
+</div>
+<div ng-if="Vagas.length">
+    <div class="list-group" data-ng-repeat="vaga in Vagas | filter: search.valor">
+        <a href ng-click="viewVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#viewVaga">
+            <h4 class="list-group-item-heading" ng-bind="vaga.titulo">List group item heading</h4>
+            <p class="list-group-item-text" ng-bind="vaga.sobre"></p>
+            <button ui-sref="main.vagasanalise({id: vaga.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Analise</button>
+        </a>
+    </div>
 </div>
 
 <!-- View Modal -->
@@ -27,7 +33,7 @@
                     <div class="form-group">
                         <label for="labelTitulo" class="col-sm-2 control-label">Email:</label>
                         <div class="col-sm-10">
-                            <label  class="control-label" id="labelTitulo" placeholder="Email da empresa" ng-bind="viewVaga.email">
+                            <label class="control-label" id="labelTitulo" placeholder="Email da empresa" ng-bind="viewVaga.email">
                         </div>
                     </div>
                     <div class="form-group">
@@ -67,9 +73,10 @@
                     <div class="form-group">
                         <label for="selectArea" class="col-sm-2 control-label">Tipo contrato</label>
                         <div class="col-sm-10">
-                            Estágio <input type="checkbox" ng-model="viewVaga.contratacao['Estágio']" disabled>
-                            PJ <input type="checkbox" ng-model="viewVaga.contratacao['PJ']" disabled>
-                            CLT <input type="checkbox" ng-model="viewVaga.contratacao['CLT']" disabled>
+                            Estágio
+                            <input type="checkbox" ng-model="viewVaga.contratacao['Estágio']" disabled>PJ
+                            <input type="checkbox" ng-model="viewVaga.contratacao['PJ']" disabled>CLT
+                            <input type="checkbox" ng-model="viewVaga.contratacao['CLT']" disabled>
                         </div>
                     </div>
 
@@ -169,9 +176,10 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Tipo contrato</label>
                         <div class="col-sm-10">
-                            Estágio <input type="checkbox" ng-model="newVaga.contratacao['Estágio']">
-                            PJ <input type="checkbox" ng-model="newVaga.contratacao['PJ']">
-                            CLT <input type="checkbox" ng-model="newVaga.contratacao['CLT']">
+                            Estágio
+                            <input type="checkbox" ng-model="newVaga.contratacao['Estágio']">PJ
+                            <input type="checkbox" ng-model="newVaga.contratacao['PJ']">CLT
+                            <input type="checkbox" ng-model="newVaga.contratacao['CLT']">
                         </div>
                     </div>
 

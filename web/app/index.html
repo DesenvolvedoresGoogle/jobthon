@@ -20,6 +20,7 @@
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
 </head>
 
 <body ng-app="appApp">
@@ -31,8 +32,6 @@
     <div ng-if="true" class="container">
         <div class="header">
             <ul class="nav nav-pills pull-right">
-                <li><a href ui-sref="main.home">Home</a>
-                </li>
                 <li><a href ui-sref="main.empresas">Empresas</a>
                 </li>
                 <li><a href ui-sref="main.vagas">Vagas</a>
@@ -40,7 +39,7 @@
                 <li><a href ui-sref="main.curriculo">Curriculos</a>
                 </li>
             </ul>
-            <h3 class="text-muted">Jobthon</h3>
+            <h1 ><a style="font-family: 'Lobster', cursive;color:black;" class="header-brand" href="#">Jobthon</a></h1>
         </div>
         <div ui-view></div>
     </div>

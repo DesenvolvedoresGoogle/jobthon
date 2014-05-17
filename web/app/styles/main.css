@@ -3,7 +3,9 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
+#title:hover{
+  text-decoration: none;
+}
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
 .marketing,

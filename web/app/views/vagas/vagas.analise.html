@@ -1,17 +1,22 @@
 <h3>Analise</h3>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Nome do candidato</th>
-            <th>Compatibilidade</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr ng-repeat="analise in AnaliseVagas">
-            <td>{{$index + 1}}</td>
-            <td>{{analise.nomeCurriculo}}</td>
-            <td>{{analise.compatibilidade}}%</td>
-        </tr>
-    </tbody>
-</table>
+<div ng-if="!AnaliseVagas.length">
+    <h4>Não existe curriculos válidos pra essa vaga</h4>
+</div>
+<div ng-if="AnaliseVagas.length">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Nome do candidato</th>
+                <th>Compatibilidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="analise in AnaliseVagas">
+                <td>{{$index + 1}}</td>
+                <td>{{analise.nomeCurriculo}}</td>
+                <td>{{analise.compatibilidade | number:2}}%</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -5,14 +5,18 @@
 <p></p>
 <input type="text" class="form-control" placeholder="Pesquisar" ng-model="search.valor">
 <br>
-<div class="list-group" data-ng-repeat="curriculo in Curriculos | filter:search.valor">
-    <a href ng-click="editCurriculos(curriculo)" class="list-group-item" data-toggle="modal" data-target="#editCurriculo">
-        <h4 class="list-group-item-heading" ng-bind="curriculo.nome">List group item heading</h4>
-        <p class="list-group-item-text" ng-bind="curriculo.sobre"></p>
-        <button ui-sref="main.curriculoanalise({email: curriculo.email} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Analise</button>
-    </a>
+<div ng-if="!Curriculos.length">
+    <img src="images/ajax-loader.gif" style="display: block;margin-left: auto;margin-right: auto;">
 </div>
-
+<div ng-if="Curriculos.length">
+    <div class="list-group" data-ng-repeat="curriculo in Curriculos | filter:search.valor">
+        <a href ng-click="editCurriculos(curriculo)" class="list-group-item" data-toggle="modal" data-target="#editCurriculo">
+            <h4 class="list-group-item-heading" ng-bind="curriculo.nome">List group item heading</h4>
+            <p class="list-group-item-text" ng-bind="curriculo.sobre"></p>
+            <button ui-sref="main.curriculoanalise({email: curriculo.email} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Analise</button>
+        </a>
+    </div>
+</div>
 
 
 <!-- Edit Modal -->
@@ -211,4 +215,3 @@
         </div>
     </div>
 </div>
-
