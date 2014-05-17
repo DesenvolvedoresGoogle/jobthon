@@ -418,7 +418,7 @@ func listAnaliseVaga(c appengine.Context, r render.Render, params martini.Params
 	}
 
 	var analises []Analise
-	q := datastore.NewQuery("Analise").Filter("VagaId =", vagaId).Order("-Compatibilidade")
+	q := datastore.NewQuery("Analise").Filter("Compatibilidade >=", 1.0).Filter("VagaId =", vagaId).Order("-Compatibilidade")
 	_, err = q.GetAll(c, &analises)
 	if err != nil {
 		log.Println(err)
@@ -431,7 +431,7 @@ func listAnaliseVaga(c appengine.Context, r render.Render, params martini.Params
 
 func listAnaliseCurriculo(c appengine.Context, r render.Render, params martini.Params) {
 	var analise []Analise
-	q := datastore.NewQuery("Analise").Filter("CurriculoId =", params["curriculoEmail"]).Order("-Compatibilidade")
+	q := datastore.NewQuery("Analise").Filter("Compatibilidade >=", 1.0).Filter("CurriculoId =", params["curriculoEmail"]).Order("-Compatibilidade")
 	_, err := q.GetAll(c, &analise)
 	if err != nil {
 		log.Println(err)
