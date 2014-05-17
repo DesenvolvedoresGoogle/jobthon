@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"appengine"
 	"appengine/datastore"
@@ -65,6 +66,7 @@ func appEngine(c martini.Context, r *http.Request) {
 
 func cORS(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, DELETE")
 }
 
 func init() {
@@ -86,17 +88,14 @@ func init() {
 	m.Get("/curriculo/:email", getCurriculo)
 	m.Post("/curriculo", addCurriculo)
 
+	m.Get("/analises/vaga/:vagaId", listAnaliseVaga)
+	m.Get("/analises/curriculo/:curriculoEmail", listAnaliseCurriculo)
+
+	// Task
 	m.Post("/matcher/curriculos", matcherCurriculos)
 	m.Post("/matcher/vagas", matcherVagas)
 
 	http.Handle("/", m)
-}
-
-func (a *Analise) Salvar(c appengine.Context) error {
-	uniqueKey := a.EmpresaId + "|" + a.CurriculoId + "|" + strconv.Itoa(int(a.VagaId))
-	key := datastore.NewKey(c, "Analise", uniqueKey, 0, nil)
-	_, err := datastore.Put(c, key, a)
-	return err
 }
 
 func listEmpresas(c appengine.Context, r render.Render, params martini.Params) {
@@ -138,7 +137,6 @@ func getEmpresa(c appengine.Context, r render.Render, params martini.Params) {
 	key := datastore.NewKey(c, "Empresa", params["email"], 0, nil)
 	empresa := new(Empresa)
 	err := datastore.Get(c, key, empresa)
-
 	if err != nil {
 		log.Println(err)
 		r.JSON(http.StatusInternalServerError, err.Error())
@@ -300,7 +298,6 @@ func getCurriculo(c appengine.Context, r render.Render, params martini.Params) {
 	key := datastore.NewKey(c, "Curriculo", params["email"], 0, nil)
 	curriculo := new(Curriculo)
 	err := datastore.Get(c, key, curriculo)
-
 	if err != nil {
 		log.Println(err)
 		r.JSON(http.StatusInternalServerError, err.Error())
@@ -400,12 +397,87 @@ func matcherVagas(c appengine.Context, r render.Render, req *http.Request) {
 	r.JSON(http.StatusOK, "success")
 }
 
+func popularAnalise(c appengine.Context, a *Analise) error {
+	// vagaKey := datastore.NewKey(c, "Vaga", "", a.VagaId, nil)
+	// vaga := new(Vaga)
+	// err := datastore.Get(c, vagaKey, vaga)
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return err
+	// }
+	// a.Vaga = *vaga
+
+	// curriculoKey := datastore.NewKey(c, "Curriculo", a.CurriculoId, 0, nil)
+	// curriculo := new(Curriculo)
+	// err = datastore.Get(c, curriculoKey, curriculo)
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return err
+	// }
+	// a.Curriculo = curriculo
+
+	// empresaKey := datastore.NewKey(c, "Empresa", a.EmpresaId, 0, nil)
+	// empresa := new(Empresa)
+	// err = datastore.Get(c, empresaKey, empresa)
+	// if err != nil {
+	// 	log.Println(err)
+	// 	return err
+	// }
+	// a.Empresa = empresa
+
+	return nil
+}
+
+func listAnaliseVaga(c appengine.Context, r render.Render, params martini.Params) {
+	vagaId, err := strconv.ParseInt(params["vagaId"], 10, 64)
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	var analises []Analise
+	q := datastore.NewQuery("Analise").Filter("VagaId =", vagaId)
+	_, err = q.GetAll(c, &analises)
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	// for _, analise := range analises {
+
+	// }
+
+	r.JSON(http.StatusOK, analises)
+}
+
+func listAnaliseCurriculo(c appengine.Context, r render.Render, params martini.Params) {
+	var analise []Analise
+	q := datastore.NewQuery("Analise").Filter("CurriculoId =", params["curriculoEmail"])
+	_, err := q.GetAll(c, &analise)
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	r.JSON(http.StatusOK, analise)
+}
+
+func (a *Analise) Salvar(c appengine.Context) error {
+	uniqueKey := a.EmpresaId + "|" + a.CurriculoId + "|" + strconv.Itoa(int(a.VagaId))
+	key := datastore.NewKey(c, "Analise", uniqueKey, 0, nil)
+	_, err := datastore.Put(c, key, a)
+	return err
+}
+
 func matchSuperDesinteressante(necessidades, capacidades []string, a *Analise, c appengine.Context) {
 	totalNecessidades := float64(len(necessidades))
 	capacidadesEncontradas := 0.0
 	for _, necessidade := range necessidades {
 		for _, capacidade := range capacidades {
-			if necessidade == capacidade {
+			if strings.ToLower(necessidade) == strings.ToLower(capacidade) {
 				capacidadesEncontradas = capacidadesEncontradas + 1.0
 				continue
 			}
