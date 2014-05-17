@@ -66,7 +66,9 @@ func appEngine(c martini.Context, r *http.Request) {
 
 func cORS(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, DELETE")
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
+	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token")
+	w.Header().Set("Access-Control-Allow-Credentials", "true")
 }
 
 func init() {
