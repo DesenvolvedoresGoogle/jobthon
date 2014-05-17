@@ -126,7 +126,7 @@ public class FormCvActivity extends Activity {
 
 		if (nome.equals("") || idade.equals("") || habilidades.equals("")
 				|| cidade.equals("") || email.equals("") || telefone.equals("")
-				|| estado.equals("")) {
+				|| estado.equals("") || estado.equalsIgnoreCase("ESTADO")) {
 			Toast.makeText(FormCvActivity.this,
 					"Todos os campos s‹o obrigat—rios.", Toast.LENGTH_SHORT)
 					.show();

@@ -26,6 +26,11 @@
             android:name="com.github.cherobin.hackthon_2014.cliente.FormCvActivity"
             android:label="@string/formcv_titulo" >
         </activity>
+        
+        <activity
+            android:name="com.github.cherobin.hackthon_2014.cliente.ListarVagasActivity"
+            android:label="@string/listarVagas_titulo" >
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" >

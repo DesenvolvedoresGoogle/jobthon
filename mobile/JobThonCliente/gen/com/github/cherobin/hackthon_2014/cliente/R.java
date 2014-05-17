@@ -25,7 +25,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08000d;
+        public static final int action_settings=0x7f080011;
         public static final int btnCadastrarCv=0x7f08000a;
         public static final int btnEditarCv=0x7f08000b;
         public static final int btnSalvarCv=0x7f080008;
@@ -37,12 +37,18 @@ public final class R {
         public static final int editTextIdade=0x7f080001;
         public static final int editTextName=0x7f080000;
         public static final int editTextTelefone=0x7f080003;
+        public static final int empresa=0x7f08000f;
+        public static final int listviewvagas=0x7f08000d;
+        public static final int porcento=0x7f08000e;
         public static final int spinner_state=0x7f080007;
         public static final int tableRow1=0x7f080005;
+        public static final int titulo=0x7f080010;
     }
     public static final class layout {
         public static final int activity_formcv=0x7f030000;
         public static final int activity_home=0x7f030001;
+        public static final int activity_listarvaga=0x7f030002;
+        public static final int vagas_adapter=0x7f030003;
     }
     public static final class menu {
         public static final int home=0x7f070000;
@@ -63,6 +69,7 @@ public final class R {
         public static final int formcv_titulo=0x7f050007;
         public static final int hello_world=0x7f050001;
         public static final int home_titulo=0x7f050006;
+        public static final int listarVagas_titulo=0x7f05000f;
     }
     public static final class style {
         /** 
