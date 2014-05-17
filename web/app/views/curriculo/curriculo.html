@@ -9,7 +9,7 @@
     <img src="images/ajax-loader.gif" style="display: block;margin-left: auto;margin-right: auto;">
 </div>
 <div ng-if="Curriculos.length">
-    <div class="list-group" data-ng-repeat="curriculo in Curriculos | filter:search.valor">
+    <div class="list-group" data-ng-repeat="curriculo in Curriculos | filter:search.valor | orderBy:'nome'">
         <a href ng-click="editCurriculos(curriculo)" class="list-group-item" data-toggle="modal" data-target="#editCurriculo">
             <h4 class="list-group-item-heading" ng-bind="curriculo.nome">List group item heading</h4>
             <p class="list-group-item-text" ng-bind="curriculo.sobre"></p>

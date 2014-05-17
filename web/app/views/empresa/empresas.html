@@ -9,7 +9,7 @@
     <img src="images/ajax-loader.gif" style="display: block;margin-left: auto;margin-right: auto;">
 </div>
 <div ng-if="Empresas.length">
-    <div class="list-group" data-ng-repeat="empresa in Empresas |filter:search.valor">
+    <div class="list-group" data-ng-repeat="empresa in Empresas |filter:search.valor | orderBy:'nome'">
         <a href ng-click="editEmpresas(empresa)" class="list-group-item" data-toggle="modal" data-target="#editEmpresa">
             <h4 class="list-group-item-heading" ng-bind="empresa.nome">List group item heading</h4>
             <p class="list-group-item-text" ng-bind="empresa.sobre.substr(0,100)">

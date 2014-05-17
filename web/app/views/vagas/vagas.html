@@ -10,7 +10,7 @@
     <img src="images/ajax-loader.gif" style="display: block;margin-left: auto;margin-right: auto;">
 </div>
 <div ng-if="Vagas.length">
-    <div class="list-group" data-ng-repeat="vaga in Vagas | filter: search.valor">
+    <div class="list-group" data-ng-repeat="vaga in Vagas | filter: search.valor | orderBy:'titulo'">
         <a href ng-click="viewVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#viewVaga">
             <h4 class="list-group-item-heading" ng-bind="vaga.titulo">List group item heading</h4>
             <p class="list-group-item-text" ng-bind="vaga.sobre"></p>
