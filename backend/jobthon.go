@@ -17,14 +17,14 @@ import (
 )
 
 type Analise struct {
-	Id              int64     `json:"id" datastore:"-"`
-	EmpresaId       string    `json:"eid"`
-	VagaId          int64     `json:"vid"`
-	CurriculoId     string    `json:"cid"`
-	Compatibilidade float64   `json:"compatibilidade"`
-	Empresa         Empresa   `json:"-" datastore:"-"`
-	Vaga            Vaga      `json:"-" datastore:"-"`
-	Curriculo       Curriculo `json:"-" datastore:"-"`
+	Id              int64   `json:"id" datastore:"-"`
+	EmpresaId       string  `json:"eid"`
+	VagaId          int64   `json:"vid"`
+	CurriculoId     string  `json:"cid"`
+	Compatibilidade float64 `json:"compatibilidade"`
+	EmpresaNome     string  `json:"nomeEmpresa"`
+	VagaTitulo      string  `json:"nomeVaga"`
+	CurriculoNome   string  `json:"nomeCurriculo"`
 }
 
 type Curriculo struct {
@@ -47,7 +47,7 @@ type Empresa struct {
 }
 
 type Vaga struct {
-	Id          int64    `json:"id"`
+	Id          int64    `json:"id" datastore:"-"`
 	Email       string   `json:"email"`
 	Titulo      string   `json:"titulo"`
 	Sobre       string   `json:"sobre"`
@@ -67,7 +67,7 @@ func appEngine(c martini.Context, r *http.Request) {
 func cORS(w http.ResponseWriter) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-Requested-With, X-CSRF-Token")
 	w.Header().Set("Access-Control-Allow-Credentials", "true")
 }
 
@@ -330,10 +330,22 @@ func matcherCurriculos(c appengine.Context, r render.Render, req *http.Request) 
 	}
 
 	for idx, vaga := range vagas {
+		empresaKey := datastore.NewKey(c, "Empresa", vaga.Email, 0, nil)
+		empresa := new(Empresa)
+		err = datastore.Get(c, empresaKey, empresa)
+		if err != nil {
+			log.Println(err)
+			r.JSON(http.StatusInternalServerError, err.Error())
+			return
+		}
+
 		analise := &Analise{
-			EmpresaId:   vaga.Email,
-			VagaId:      keys[idx].IntID(),
-			CurriculoId: curriculo.Email,
+			EmpresaId:     vaga.Email,
+			VagaId:        keys[idx].IntID(),
+			CurriculoId:   curriculo.Email,
+			EmpresaNome:   empresa.Nome,
+			VagaTitulo:    vaga.Titulo,
+			CurriculoNome: curriculo.Nome,
 		}
 
 		necessidades := vaga.Habilidades
@@ -370,11 +382,23 @@ func matcherVagas(c appengine.Context, r render.Render, req *http.Request) {
 		return
 	}
 
+	empresaKey := datastore.NewKey(c, "Empresa", vaga.Email, 0, nil)
+	empresa := new(Empresa)
+	err = datastore.Get(c, empresaKey, empresa)
+	if err != nil {
+		log.Println(err)
+		r.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
 	for _, curriculo := range curriculos {
 		analise := &Analise{
-			EmpresaId:   vaga.Email,
-			VagaId:      vagaKey.IntID(),
-			CurriculoId: curriculo.Email,
+			EmpresaId:     vaga.Email,
+			VagaId:        vagaKey.IntID(),
+			CurriculoId:   curriculo.Email,
+			EmpresaNome:   empresa.Nome,
+			VagaTitulo:    vaga.Titulo,
+			CurriculoNome: curriculo.Nome,
 		}
 
 		necessidades := vaga.Habilidades
@@ -383,37 +407,6 @@ func matcherVagas(c appengine.Context, r render.Render, req *http.Request) {
 	}
 
 	r.JSON(http.StatusOK, "success")
-}
-
-func popularAnalise(c appengine.Context, a *Analise) error {
-	// vagaKey := datastore.NewKey(c, "Vaga", "", a.VagaId, nil)
-	// vaga := new(Vaga)
-	// err := datastore.Get(c, vagaKey, vaga)
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return err
-	// }
-	// a.Vaga = *vaga
-
-	// curriculoKey := datastore.NewKey(c, "Curriculo", a.CurriculoId, 0, nil)
-	// curriculo := new(Curriculo)
-	// err = datastore.Get(c, curriculoKey, curriculo)
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return err
-	// }
-	// a.Curriculo = curriculo
-
-	// empresaKey := datastore.NewKey(c, "Empresa", a.EmpresaId, 0, nil)
-	// empresa := new(Empresa)
-	// err = datastore.Get(c, empresaKey, empresa)
-	// if err != nil {
-	// 	log.Println(err)
-	// 	return err
-	// }
-	// a.Empresa = empresa
-
-	return nil
 }
 
 func listAnaliseVaga(c appengine.Context, r render.Render, params martini.Params) {
@@ -432,10 +425,6 @@ func listAnaliseVaga(c appengine.Context, r render.Render, params martini.Params
 		r.JSON(http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	// for _, analise := range analises {
-
-	// }
 
 	r.JSON(http.StatusOK, analises)
 }
