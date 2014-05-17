@@ -11,8 +11,12 @@ angular.module('appApp')
                 getList: function() {
                     return Restangular.all('vagas').getList();
                 },
-                save: function(id) {
-
+                save: function(vaga) {
+                    if (vaga.id >= 0) {
+                        Restangular.one('vagas', vaga.id).customPUT(vaga)
+                    } else {
+                        Restangular.all('vagas').post(vaga);
+                    }
                 }
             }
 

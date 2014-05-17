@@ -8,7 +8,7 @@
     <a href ng-click="editVagas(vaga)" class="list-group-item" data-toggle="modal" data-target="#editVaga">
         <h4 class="list-group-item-heading" ng-bind="vaga.titulo">List group item heading</h4>
         <p class="list-group-item-text" ng-bind="vaga.sobre"></p>
-        <button ui-sref="main.vagascurriculo({id: vaga.id} )" ng-click="$event.stopPropagation();"class="btn btn-primary">Curriculos</button>
+        <button ui-sref="main.vagascurriculo({id: vaga.id} )" ng-click="$event.stopPropagation();" class="btn btn-primary">Curriculos</button>
     </a>
 </div>
 
@@ -21,7 +21,6 @@
                 <h4 class="modal-title" id="editVagaLabel">Editar Vaga</h4>
             </div>
             <div class="modal-body">
-
                 <!-- Form -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
@@ -79,11 +78,15 @@
                                 <tbody>
                                     <tr ng-repeat="habilidade in editVaga.habilidades">
                                         <td>{{$index + 1}}</td>
-                                        <td>{{habilidade.descricao}}</td>
+                                        <td>{{habilidade}}</td>
+                                    </tr>
+                                    <tr ng-if="adicionando">
+                                        <td></td>
+                                        <td><input type="text" ng-model="habilidade"><button ng-click="addHabilidade(editVaga, habilidade)"class="btn btn-success btn-sm">+</button></td></td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newItem">
+                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </td>
@@ -115,6 +118,7 @@
             <div class="modal-body">
 
                 <!-- Form -->
+                <!-- Form -->
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="inputTitulo" class="col-sm-2 control-label">Vaga</label>
@@ -126,7 +130,7 @@
                     <div class="form-group">
                         <label for="inputSobre" class="col-sm-2 control-label">Sobre</label>
                         <div class="col-sm-10">
-                            <textarea type="email" class="form-control" id="inputSobre" placeholder="Sobre" ng-model="newVaga.sobre"></textarea>
+                            <textarea class="form-control" id="inputSobre" placeholder="Sobre" ng-model="newVaga.sobre"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
@@ -171,11 +175,11 @@
                                 <tbody>
                                     <tr ng-repeat="habilidade in newVaga.habilidades">
                                         <td>{{$index + 1}}</td>
-                                        <td>{{habilidade.descricao}}</td>
+                                        <td>{{habilidade}}</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newItem">
+                                            <button data-ng-click="initNewHavilidade(habilidade)" class="btn btn-success btn-xs" data-toggle="modal" data-target="#newHabilidade">
                                                 <span class="glyphicon glyphicon-plus"></span>
                                             </button>
                                         </td>
@@ -189,8 +193,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button ng-click="addVaga()" type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
 </div>
+
+

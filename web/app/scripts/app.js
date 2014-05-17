@@ -36,9 +36,16 @@ angular
                 .state('main.curriculo', {
                     url: "curriculo",
                     templateUrl: "views/curriculo/curriculo.html",
-                    controller: function($scope) {
-                        $scope.items = ["A", "List", "Of", "Items"];
-                    }
+                    controller: 'CurriculoCtrl'
                 })
+                .state('main.empresas', {
+                    url: "empresas",
+                    templateUrl: "views/empresa/empresas.html",
+                    controller: 'EmpresaCtrl'
+                })
+        }
+    ]).run(['$rootScope', 'Estados',
+        function($rootScope, Estados) {
+            $rootScope.Estados = Estados;
         }
     ]);

@@ -3,24 +3,6 @@
 angular.module('appApp')
     .controller('VagaCtrl', ['$scope', 'VagaService',
         function($scope, VagaService) {
-            // $scope.Vagas = [{
-            //     id: 0,
-            //     titulo: 'test',
-            //     sobre: 'testestsete',
-            //     habilidades: [{
-            //         descricao: 'habilidade1'
-            //     }, {
-            //         descricao: 'habilidade1'
-            //     }]
-            // }, {
-            //     id: 1,
-            //     titulo: 'test',
-            //     sobre: 'testestsete'
-            // }, {
-            //     id: 2,
-            //     titulo: 'test',
-            //     sobre: 'testestsete'
-            // }];
 
             VagaService.getList().then(function(data) {
                 $scope.Vagas = data;
@@ -28,6 +10,21 @@ angular.module('appApp')
 
             $scope.editVagas = function(vaga) {
                 $scope.editVaga = vaga;
+            };
+
+            $scope.addVaga = function() {
+                $scope.Vagas.push($scope.newVaga);
+                VagaService.save($scope.newVaga);
+            };
+
+            $scope.addHabilidade = function(vaga, habilidade) {
+                vaga.habilidades.push(habilidade);
+                $scope.adicionando = false;
+            };
+
+            $scope.initNewHavilidade = function() {
+                $scope.habilidade = undefined;
+                $scope.adicionando = true;
             }
 
             $scope.AreasVagas = [{
