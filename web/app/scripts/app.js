@@ -28,9 +28,9 @@ angular
                     templateUrl: "views/vagas/vagas.html",
                     controller: 'VagaCtrl'
                 })
-                .state('main.vagascurriculo', {
-                    url: "vagas/:id/curriculo",
-                    templateUrl: "views/vagas/vagas.curriculo.html",
+                .state('main.vagasanalise', {
+                    url: "vagas/:id/analises",
+                    templateUrl: "views/vagas/vagas.analise.html",
                     controller: 'VagaCtrl'
                 })
                 .state('main.curriculo', {
