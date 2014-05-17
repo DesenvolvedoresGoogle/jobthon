@@ -72,7 +72,19 @@ public class CreateCompanyActivity extends Activity {
 
 			@Override
 			public void onClick(View arg0) {
-				createCompany();
+				
+				
+						
+				if(companyName.getText().toString().equals("")||
+				companyCity.getText().toString().equals("")|| selectState.equals("ESTADO")|| companyAbout
+						.getText().toString().equals("")|| companyPhone.getText()
+						.toString().equals("")|| companyEMail.getText().toString().equals("")){
+					Toast.makeText(getApplicationContext(), "Error ao cadastrar. Todos os Campos Obrigatórios",
+							Toast.LENGTH_LONG).show();
+				}else{								
+					createCompany();
+				}
+				
 			
 			}
 		});
@@ -124,7 +136,7 @@ public class CreateCompanyActivity extends Activity {
 			if (response.contains("success")) {
 				Toast.makeText(getBaseContext(), "Criado Com Sucesso",
 						Toast.LENGTH_LONG).show();
-				finish();;
+				finish();
 			} else {
 				Toast.makeText(getApplicationContext(), "Error ao cadastrar",
 						Toast.LENGTH_LONG).show();
