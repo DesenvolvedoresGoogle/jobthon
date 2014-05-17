@@ -13,19 +13,24 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.cherobin.hackthon_2014.VO.Curriculum;
 import com.github.cherobin.hackthon_2014.VO.JobId;
 import com.github.cherobin.hackthon_2014.VO.JobView;
 import com.google.gson.Gson;
@@ -68,6 +73,106 @@ public class ViewJobActivity extends Activity {
 		}else {
 			Toast.makeText(getBaseContext(), "Nenhum CV cadastrado!", Toast.LENGTH_LONG).show();
 		}
+		
+		
+		
+		
+		
+		viewJobsList
+		.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent,
+					final View view, final int position, long id) {
+				final JobView item = listJobs.get(position);
+
+				AlertDialog alertDialog = new AlertDialog.Builder(
+						ViewJobActivity.this).create();
+
+				alertDialog.setTitle(item.nomeCurriculo);
+
+//				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+//						"Deletar",
+//						new DialogInterface.OnClickListener() {
+//
+//							public void onClick(DialogInterface dialog,
+//									int id) {
+//
+//								view.animate().setDuration(2000)
+//										.alpha(0)
+//										.withEndAction(new Runnable() {
+//											@Override
+//											public void run() {
+//												list.remove(item);
+//
+//												adapter.notifyDataSetChanged();
+//												view.setAlpha(1);
+//											}
+//										});
+//							}
+//						});
+
+//				alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL,
+//						"Editar",
+//						new DialogInterface.OnClickListener() {
+//
+//							public void onClick(DialogInterface dialog,
+//									int id) {
+//								Intent intent = new Intent(
+//										JobsListActivity.this,
+//										CreateJobActivity.class);
+//
+//								Job_com_id details = myJobsList.get(position);
+//
+//								Bundle bundle = new Bundle();
+//								bundle.putSerializable("job",
+//										details);
+//								intent.putExtras(bundle);
+//
+//								startActivity(intent);
+//
+//							}
+//						});
+
+				alertDialog.setButton(AlertDialog.BUTTON_POSITIVE,
+						"Visualizar Curriculum",
+						new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog,
+									int id) {
+
+
+							 
+								Intent intent = new Intent(
+										ViewJobActivity.this,
+										ViewCurriculumActivity.class);
+								
+								JobView details = listJobs.get(position);
+								
+								Bundle bundle = new Bundle();
+								bundle.putSerializable("curriculum",details);
+								intent.putExtras(bundle);
+								startActivity(intent);
+								
+
+							}
+
+						});
+				
+				alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE,
+						"Sair",
+						new DialogInterface.OnClickListener() {
+
+							public void onClick(DialogInterface dialog,
+									int id) {
+							 
+
+							}
+
+						});
+				alertDialog.show();
+			}
+
+		});
 	}
 	
 	

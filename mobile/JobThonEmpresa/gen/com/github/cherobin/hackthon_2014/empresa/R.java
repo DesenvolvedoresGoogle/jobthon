@@ -25,7 +25,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btnCreateJob=0x7f070015;
+        public static final int btnCreateJob=0x7f070025;
         public static final int btnSendJob=0x7f070013;
         public static final int buttonCompanyCadastro=0x7f070007;
         public static final int checkBoxCLT=0x7f070010;
@@ -40,22 +40,39 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int editTextCompanyName=0x7f070000;
         public static final int editTextCompanyPhone=0x7f070002;
         public static final int editTextJobName=0x7f070008;
-        public static final int listViewJobs=0x7f070014;
-        public static final int listViewViewJobs=0x7f070016;
-        public static final int progressBarJobs=0x7f070017;
+        public static final int listViewJobs=0x7f070024;
+        public static final int listViewViewJobs=0x7f070026;
+        public static final int progressBarJobs=0x7f070027;
         public static final int spinnerArea=0x7f07000b;
         public static final int spinnerCompanyState=0x7f070006;
         public static final int spinner_state=0x7f07000d;
         public static final int tableRow1=0x7f070004;
         public static final int tableRow2=0x7f07000e;
+        public static final int tableRow3=0x7f07001a;
+        public static final int tableRow4=0x7f07001e;
+        public static final int tableRow5=0x7f070021;
+        public static final int textView1=0x7f070014;
+        public static final int textView2=0x7f070016;
+        public static final int textView3=0x7f070018;
+        public static final int textView4=0x7f07001b;
+        public static final int textView5=0x7f07001f;
+        public static final int textView6=0x7f070022;
+        public static final int textViewCCidade=0x7f07001c;
+        public static final int textViewCEMail=0x7f070020;
+        public static final int textViewCEstado=0x7f07001d;
+        public static final int textViewCHabilidades=0x7f070019;
+        public static final int textViewCIdade=0x7f070017;
+        public static final int textViewCName=0x7f070015;
+        public static final int textViewCTelefone=0x7f070023;
         public static final int textViewListClientName=0x7f07000f;
     }
     public static final class layout {
         public static final int activity_create_company=0x7f030000;
         public static final int activity_createjobs=0x7f030001;
-        public static final int activity_listjobs=0x7f030002;
-        public static final int activity_view_job=0x7f030003;
-        public static final int item_jobs=0x7f030004;
+        public static final int activity_curriculum=0x7f030002;
+        public static final int activity_listjobs=0x7f030003;
+        public static final int activity_view_job=0x7f030004;
+        public static final int item_jobs=0x7f030005;
     }
     public static final class string {
         public static final int app_name=0x7f050000;

@@ -1,6 +1,8 @@
 package com.github.cherobin.hackthon_2014.VO;
 
-public class JobView {
+import java.io.Serializable;
+
+public class JobView implements Serializable {
 
 	public long id;
 	public String eid;
