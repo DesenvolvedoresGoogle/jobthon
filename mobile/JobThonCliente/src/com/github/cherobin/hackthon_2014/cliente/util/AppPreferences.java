@@ -18,12 +18,12 @@ public class AppPreferences {
 		this._prefsEditor = _sharedPrefs.edit();
 	}
 
-	public boolean cvCadastrado() {
-		return _sharedPrefs.getBoolean(CV_CADASTRADO, false);
+	public String getCvCadastrado() {
+		return _sharedPrefs.getString(CV_CADASTRADO, "");
 	}
 
-	public void saveCvCadastrado(boolean cadastrado) {
-		_prefsEditor.putBoolean(CV_CADASTRADO, cadastrado);
+	public void saveCvCadastrado(String cadastrado) {
+		_prefsEditor.putString(CV_CADASTRADO, cadastrado);
 		_prefsEditor.commit();
 	}
 }
