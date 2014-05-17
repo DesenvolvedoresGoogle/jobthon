@@ -17,5 +17,6 @@
     
     <string name="cv_cidade">Cidade</string>
     <string name="btnSalvarCv">Salvar</string>
+    <string name="listarVagas_titulo">Minhas Vagas</string>
 
 </resources>
