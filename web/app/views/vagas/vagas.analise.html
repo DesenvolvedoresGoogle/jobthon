@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-class="{success: analise.compatibilidade >= 75, warning: analise.compatibilidade >= 55 && analise.compatibilidade < 75}" ng-repeat="analise in AnaliseVagas">
+            <tr ng-class="{success: analise.compatibilidade >= 75, warning: analise.compatibilidade >= 55 && analise.compatibilidade < 75}" ng-repeat="analise in AnaliseVagas | orderBy:'nomeCurriculo'">
                 <td>{{$index + 1}}</td>
                 <td>{{analise.nomeCurriculo}}</td>
                 <td>{{analise.compatibilidade | number:2}}%</td>
